@@ -8,9 +8,15 @@
 import UIKit
 import SnapKit
 
+protocol HomeViewProtocol {
+    func successNotes(notes: [String])
+}
+
 class HomeView: UIViewController {
     
-    private var notes: [String] = ["Do a homework", "GO to the gym", "Buy a ticket", "Submit tasks"]
+    private var controller: HomeControllerProtocol?
+    
+    private var notes: [String] = []
 
     private lazy var searchBar: UISearchBar = {
         let view = UISearchBar() 
@@ -52,6 +58,8 @@ class HomeView: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupUI()
+        controller = HomeController(view: self)
+        controller?.onGetNotes()
     }
     
     private func setupUI(){
@@ -113,4 +121,13 @@ extension HomeView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (collectionView.frame.width - 12 ) / 2 , height: 100)
     }
+}
+
+extension HomeView: HomeViewProtocol {
+    func successNotes(notes: [String]) {
+        self.notes = notes
+        notesCollectionView.reloadData()
+    }
+    
+    
 }
