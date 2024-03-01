@@ -17,9 +17,9 @@ class HomeView: UIViewController {
     private var controller: HomeControllerProtocol?
     
     private var notes: [String] = []
-
+    
     private lazy var searchBar: UISearchBar = {
-        let view = UISearchBar() 
+        let view = UISearchBar()
         view.placeholder = "Search"
         return view
     }()
@@ -63,12 +63,28 @@ class HomeView: UIViewController {
     }
     
     private func setupUI(){
+        setupNavigationItem()
         setupSearchBar()
         setupTitle()
         setupNotesCollections()
         setupButton()
     }
 
+    private func setupNavigationItem() {
+        navigationItem.title = "Home"
+        
+        let image = UIImage(named: "settings")
+        let resizedImage = image?.resized(to: CGSize(width: 25, height: 25))
+        let rightBarButtonItem = UIBarButtonItem(image: resizedImage, style: .plain, target: self, action: #selector(settingsButtonTapped))
+        rightBarButtonItem.tintColor = .black
+        navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
+    
+    @objc func settingsButtonTapped(_ sender:UIButton){
+        let vc = SettingsVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     private func setupSearchBar(){
         view.addSubview(searchBar)
         searchBar.snp.makeConstraints { make in
@@ -128,6 +144,12 @@ extension HomeView: HomeViewProtocol {
         self.notes = notes
         notesCollectionView.reloadData()
     }
-    
-    
+}
+
+extension UIImage {
+    func resized(to newSize: CGSize) -> UIImage {
+        return UIGraphicsImageRenderer(size: newSize).image { _ in
+            draw(in: CGRect(origin: .zero, size: newSize))
+        }
+    }
 }
