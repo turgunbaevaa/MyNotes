@@ -7,25 +7,32 @@
 
 import UIKit
 
+protocol SettingsViewProtocol {
+    
+}
+
 class SettingsVC: UIViewController {
+    
+    weak var controller: SettingsViewProtocol?
     
     private let settingsTableView = UITableView()
     
-    let settingsList: [SettingsList] = [
-        SettingsList(image: UIImage(named: "language"), settingsName: "Язык", settingsButton: "chevron.right"),
-        SettingsList(image: UIImage(named: "moon"), settingsName: "Темная тема", settingsButton: "switch.2"),
-        SettingsList(image: UIImage(named: "trash"), settingsName: "Очистить данные", settingsButton: "")
+    let settingsList: [SettingsModel] = [
+        SettingsModel(image: UIImage(named: "language"), settingsName: "Язык", settingsButton: "chevron.right"),
+        SettingsModel(image: UIImage(named: "moon"), settingsName: "Темная тема", settingsButton: "switch.2"),
+        SettingsModel(image: UIImage(named: "trash"), settingsName: "Очистить данные", settingsButton: "")
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        //controller = SettingsVC
         setupUI()
     }
     
     private func setupUI(){
         setupNavigationItem()
-        setupContactTableView()
+        setupSettingsTableView()
     }
     
     private func setupNavigationItem() {
@@ -38,7 +45,7 @@ class SettingsVC: UIViewController {
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
-    private func setupContactTableView(){
+    private func setupSettingsTableView(){
         settingsTableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.reuseID)
         settingsTableView.dataSource = self
         view.addSubview(settingsTableView)
@@ -84,4 +91,8 @@ extension SettingsVC: UITableViewDataSource {
         
         return cell
     }
+}
+
+extension SettingsVC: SettingsViewProtocol {
+    
 }

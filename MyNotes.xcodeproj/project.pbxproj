@@ -18,7 +18,8 @@
 		0A6D4C0B2B864A77007532EE /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6D4C0A2B864A77007532EE /* NoteCell.swift */; };
 		0AA171892B90D1B700BE39B4 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA171882B90D1B700BE39B4 /* SettingsVC.swift */; };
 		0AA1718E2B90E69D00BE39B4 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1718D2B90E69D00BE39B4 /* SettingsTableViewCell.swift */; };
-		0AA171902B90F2EC00BE39B4 /* SettingsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1718F2B90F2EC00BE39B4 /* SettingsList.swift */; };
+		0AA171902B90F2EC00BE39B4 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1718F2B90F2EC00BE39B4 /* SettingsModel.swift */; };
+		0AB6E6852B96595400B8F6FF /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6E6842B96595400B8F6FF /* SettingsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +35,8 @@
 		0A6D4C0A2B864A77007532EE /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		0AA171882B90D1B700BE39B4 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		0AA1718D2B90E69D00BE39B4 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
-		0AA1718F2B90F2EC00BE39B4 /* SettingsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsList.swift; sourceTree = "<group>"; };
+		0AA1718F2B90F2EC00BE39B4 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
+		0AB6E6842B96595400B8F6FF /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,7 +121,8 @@
 			children = (
 				0AA171882B90D1B700BE39B4 /* SettingsVC.swift */,
 				0AA1718D2B90E69D00BE39B4 /* SettingsTableViewCell.swift */,
-				0AA1718F2B90F2EC00BE39B4 /* SettingsList.swift */,
+				0AA1718F2B90F2EC00BE39B4 /* SettingsModel.swift */,
+				0AB6E6842B96595400B8F6FF /* SettingsController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -205,7 +208,8 @@
 				0A21E7B92B8E700E007066EC /* HomeModel.swift in Sources */,
 				0A6D4BF42B86433C007532EE /* SceneDelegate.swift in Sources */,
 				0A6D4C0B2B864A77007532EE /* NoteCell.swift in Sources */,
-				0AA171902B90F2EC00BE39B4 /* SettingsList.swift in Sources */,
+				0AA171902B90F2EC00BE39B4 /* SettingsModel.swift in Sources */,
+				0AB6E6852B96595400B8F6FF /* SettingsController.swift in Sources */,
 				0A21E7B72B8E6FF9007066EC /* HomeController.swift in Sources */,
 				0AA171892B90D1B700BE39B4 /* SettingsVC.swift in Sources */,
 				0AA1718E2B90E69D00BE39B4 /* SettingsTableViewCell.swift in Sources */,
