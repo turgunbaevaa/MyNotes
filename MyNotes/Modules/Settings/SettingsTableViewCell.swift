@@ -8,9 +8,15 @@
 import UIKit
 import SnapKit
 
+protocol SettingsTableViewCellDelegate: AnyObject {
+    func switchStateChanged(isOn: Bool)
+}
+
 class SettingsTableViewCell: UITableViewCell {
     
     static let reuseID = "note_cell"
+    
+    weak var delegate: SettingsTableViewCellDelegate?
     
     private lazy var settingsImg: UIImageView = {
         let view = UIImageView()
@@ -101,5 +107,15 @@ class SettingsTableViewCell: UITableViewCell {
             make.centerY.equalTo(contentView)
             make.trailing.equalTo(contentView).offset(-25)
         }
+        switchButton.addTarget(self, action: #selector(switchButtonTapped), for: .valueChanged)
+    }
+    
+    @objc func switchButtonTapped() {
+        if switchButton.isOn {
+            delegate?.switchStateChanged(isOn: true)
+        } else {
+            delegate?.switchStateChanged(isOn: false)
+        }
     }
 }
+

@@ -13,7 +13,8 @@ protocol SettingsViewProtocol {
 
 class SettingsVC: UIViewController {
     
-    weak var controller: SettingsViewProtocol?
+    //weak var controller: SettingsViewProtocol?
+    var controller: SettingsControllerProtocol?
     
     private let settingsTableView = UITableView()
     
@@ -26,7 +27,7 @@ class SettingsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        //controller = SettingsVC
+        controller = SettingsController(view: self)
         setupUI()
     }
     

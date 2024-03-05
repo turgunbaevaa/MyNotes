@@ -17,8 +17,8 @@ struct SettingsModel {
     var settingsName: String
     var settingsButton: String
     
-//    weak var controller: SettingsControllerProtocol?
-//    
+    weak var controller: SettingsControllerProtocol?
+    
 //    init(controller: SettingsControllerProtocol){
 //        self.controller = controller
 //    }

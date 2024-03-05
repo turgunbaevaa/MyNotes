@@ -12,6 +12,11 @@ protocol HomeViewProtocol {
     func successNotes(notes: [String])
 }
 
+//struct Note {
+//    var title: String
+//    var liked: Bool
+//}
+
 class HomeView: UIViewController {
     
     private var controller: HomeControllerProtocol?
@@ -85,6 +90,10 @@ class HomeView: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+//    func likeButtonHandler(indexHandler: ([String]) -> ()){
+//        indexHandler(notes)
+//    }
+    
     private func setupSearchBar(){
         view.addSubview(searchBar)
         searchBar.snp.makeConstraints { make in
@@ -99,7 +108,6 @@ class HomeView: UIViewController {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom).offset(24)
             make.horizontalEdges.equalToSuperview().inset(40)
-            //make.centerX.equalTo(view.snp.centerX)
         }
     }
     private func setupNotesCollections(){
@@ -129,6 +137,9 @@ extension HomeView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoteCell.reuseID, for: indexPath) as! NoteCell
         cell.fill(title: notes[indexPath.row])
+        cell.index = indexPath.row
+        cell.delegate = self 
+        print(indexPath)
         return cell
     }
 }
@@ -152,4 +163,18 @@ extension UIImage {
             draw(in: CGRect(origin: .zero, size: newSize))
         }
     }
+}
+
+extension HomeView: NoteCellDelegate {
+    func didRemoveButton(index: Int) {
+        notes.remove(at: index)
+        notesCollectionView.reloadData()
+    }
+    
+    func didLikedButton(index: Int) {
+        let cell = notesCollectionView.cellForItem(at: [0, index]) as? NoteCell
+        cell?.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        
+    }
+    
 }
