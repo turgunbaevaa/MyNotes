@@ -12,16 +12,11 @@ protocol SettingsModelProtocol {
 }
 
 struct SettingsModel {
-    
-    var image: UIImage?
-    var settingsName: String
-    var settingsButton: String
-    
     weak var controller: SettingsControllerProtocol?
     
-//    init(controller: SettingsControllerProtocol){
-//        self.controller = controller
-//    }
+    init(controller: SettingsControllerProtocol){
+        self.controller = controller
+    }
     
 }
 

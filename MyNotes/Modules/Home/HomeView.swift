@@ -166,6 +166,7 @@ extension UIImage {
 }
 
 extension HomeView: NoteCellDelegate {
+    
     func didRemoveButton(index: Int) {
         notes.remove(at: index)
         notesCollectionView.reloadData()
@@ -174,7 +175,5 @@ extension HomeView: NoteCellDelegate {
     func didLikedButton(index: Int) {
         let cell = notesCollectionView.cellForItem(at: [0, index]) as? NoteCell
         cell?.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        
     }
-    
 }

@@ -17,7 +17,7 @@ class SettingsController {
     
     init(view: SettingsViewProtocol) {
         self.view = view
-        //self.model = SettingsModel(controller: self)
+        self.model = SettingsModel(controller: self)
     }
 }
 

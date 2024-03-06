@@ -66,12 +66,21 @@ class NoteCell: UICollectionViewCell {
         delegate?.didRemoveButton(index: index)
     }
     
-    @objc private func likeButtonTapped(){
-        print("liked")
+    var isLiked = false
+    
+    @objc func likeButtonTapped() {
+        if isLiked {
+            likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            isLiked = false
+        } else {
+            likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            isLiked = true
+        }
         guard let index = index else {
             return
         }
         delegate?.didLikedButton(index: index)
+        print("liked")
     }
     
     required init?(coder: NSCoder) {

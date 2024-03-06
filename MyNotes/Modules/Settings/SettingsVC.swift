@@ -18,12 +18,11 @@ class SettingsVC: UIViewController {
     
     private let settingsTableView = UITableView()
     
-    let settingsList: [SettingsModel] = [
-        SettingsModel(image: UIImage(named: "language"), settingsName: "Язык", settingsButton: "chevron.right"),
-        SettingsModel(image: UIImage(named: "moon"), settingsName: "Темная тема", settingsButton: "switch.2"),
-        SettingsModel(image: UIImage(named: "trash"), settingsName: "Очистить данные", settingsButton: "")
-    ]
-    
+    private var settings: [Settings] = [
+        Settings(image: "globe", title: "Язык", type: .withButton, language: "Русский"),
+        Settings(image: "moon", title: "Темная тема", type: .withSwitch, language: ""),
+        Settings(image: "trash", title: "Очистить", type: .none, language: "")]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -36,9 +35,12 @@ class SettingsVC: UIViewController {
         setupSettingsTableView()
     }
     
+    deinit {
+        print("Экран настроек пропал из вида и уничтожился")
+    }
+    
     private func setupNavigationItem() {
         navigationItem.title = "Settings"
-        
         let image = UIImage(named: "settings")
         let resizedImage = image?.resized(to: CGSize(width: 25, height: 25))
         let rightBarButtonItem = UIBarButtonItem(image: resizedImage, style: .plain, target: self, action: #selector(settingsButtonTapped))
@@ -47,7 +49,7 @@ class SettingsVC: UIViewController {
     }
     
     private func setupSettingsTableView(){
-        settingsTableView.register(SettingsTableViewCell.self, forCellReuseIdentifier: SettingsTableViewCell.reuseID)
+        settingsTableView.register(SettingsCell.self, forCellReuseIdentifier: SettingsCell.reuseID)
         settingsTableView.dataSource = self
         view.addSubview(settingsTableView)
         settingsTableView.snp.makeConstraints { make in
@@ -64,36 +66,33 @@ class SettingsVC: UIViewController {
 
 extension SettingsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        settingsList.count
+        return settings.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.reuseID, for: indexPath) as! SettingsTableViewCell
-        
-        print("Configuring cell for row \(indexPath.row)")
-        
-        if indexPath.row == 0 {
-            cell.contentView.addSubview(cell.button)
-        } else {
-            cell.button.removeFromSuperview()
-        }
-        
-        if indexPath.row == 1 {
-            cell.contentView.addSubview(cell.switchButton)
-        } else {
-            cell.switchButton.removeFromSuperview()
-        }
-        
-        if let image = settingsList[indexPath.row].image {
-            cell.setup(image: image)
-        }
-        
-        cell.setup(title: settingsList[indexPath.row].settingsName)
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseID, for: indexPath) as! SettingsCell
+        cell.setup(settings: settings[indexPath.row])
+        cell.delegate = self
         return cell
+    }
+}
+
+extension SettingsVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
 }
 
 extension SettingsVC: SettingsViewProtocol {
     
+}
+
+extension SettingsVC: SettingsCellDelegate {
+    func didSwitchOn(isOn: Bool) {
+        if isOn {
+            view.overrideUserInterfaceStyle = .dark
+        } else {
+            view.overrideUserInterfaceStyle = .light
+        }
+    }
 }
