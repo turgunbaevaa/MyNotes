@@ -1,17 +1,18 @@
 //
-//  SettingsVC.swift
+//  SettingsView.swift
 //  MyNotes
 //
 //  Created by Aruuke Turgunbaeva on 29/2/24.
 //
 
 import UIKit
+import SnapKit
 
 protocol SettingsViewProtocol {
     
 }
 
-class SettingsVC: UIViewController {
+class SettingsView: UIViewController {
     
     //weak var controller: SettingsViewProtocol?
     var controller: SettingsControllerProtocol?
@@ -30,8 +31,17 @@ class SettingsVC: UIViewController {
         setupUI()
     }
     
-    private func setupUI(){
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupNavigationItem()
+        if UserDefaults.standard.bool(forKey: "theme") == true {
+            view.overrideUserInterfaceStyle = .dark
+        } else {
+            view.overrideUserInterfaceStyle = .light
+        }
+    }
+    
+    private func setupUI(){
         setupSettingsTableView()
     }
     
@@ -41,12 +51,13 @@ class SettingsVC: UIViewController {
     
     private func setupNavigationItem() {
         navigationItem.title = "Settings"
-        let image = UIImage(named: "settings")
-        let resizedImage = image?.resized(to: CGSize(width: 25, height: 25))
-        let rightBarButtonItem = UIBarButtonItem(image: resizedImage, style: .plain, target: self, action: #selector(settingsButtonTapped))
-        rightBarButtonItem.tintColor = .black
-        navigationItem.rightBarButtonItem = rightBarButtonItem
+        if UserDefaults.standard.bool(forKey: "theme") == true {
+            navigationController?.navigationBar.standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        } else {
+            navigationController?.navigationBar.standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+        }
     }
+
     
     private func setupSettingsTableView(){
         settingsTableView.register(SettingsCell.self, forCellReuseIdentifier: SettingsCell.reuseID)
@@ -64,7 +75,7 @@ class SettingsVC: UIViewController {
     }
 }
 
-extension SettingsVC: UITableViewDataSource {
+extension SettingsView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return settings.count
     }
@@ -77,18 +88,19 @@ extension SettingsVC: UITableViewDataSource {
     }
 }
 
-extension SettingsVC: UITableViewDelegate {
+extension SettingsView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
 }
 
-extension SettingsVC: SettingsViewProtocol {
+extension SettingsView: SettingsViewProtocol {
     
 }
 
-extension SettingsVC: SettingsCellDelegate {
+extension SettingsView: SettingsCellDelegate {
     func didSwitchOn(isOn: Bool) {
+        UserDefaults.standard.set(isOn, forKey: "theme")
         if isOn {
             view.overrideUserInterfaceStyle = .dark
         } else {

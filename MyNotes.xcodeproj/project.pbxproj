@@ -16,10 +16,12 @@
 		0A6D4BFE2B86433F007532EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A6D4BFC2B86433F007532EE /* LaunchScreen.storyboard */; };
 		0A6D4C072B864520007532EE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0A6D4C062B864520007532EE /* SnapKit */; };
 		0A6D4C0B2B864A77007532EE /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6D4C0A2B864A77007532EE /* NoteCell.swift */; };
-		0AA171892B90D1B700BE39B4 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA171882B90D1B700BE39B4 /* SettingsVC.swift */; };
+		0AA171892B90D1B700BE39B4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA171882B90D1B700BE39B4 /* SettingsView.swift */; };
 		0AA1718E2B90E69D00BE39B4 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1718D2B90E69D00BE39B4 /* SettingsCell.swift */; };
 		0AA171902B90F2EC00BE39B4 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA1718F2B90F2EC00BE39B4 /* SettingsModel.swift */; };
 		0AB6E6852B96595400B8F6FF /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6E6842B96595400B8F6FF /* SettingsController.swift */; };
+		0AE29E232B99F3AE00CF8A92 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE29E222B99F3AE00CF8A92 /* OnBoardingView.swift */; };
+		0AE29E252B99F4DC00CF8A92 /* OnBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE29E242B99F4DC00CF8A92 /* OnBoardCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,10 +35,12 @@
 		0A6D4BFD2B86433F007532EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A6D4BFF2B86433F007532EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A6D4C0A2B864A77007532EE /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
-		0AA171882B90D1B700BE39B4 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		0AA171882B90D1B700BE39B4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		0AA1718D2B90E69D00BE39B4 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		0AA1718F2B90F2EC00BE39B4 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		0AB6E6842B96595400B8F6FF /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		0AE29E222B99F3AE00CF8A92 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
+		0AE29E242B99F4DC00CF8A92 /* OnBoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,7 @@
 		0A6D4C082B864A28007532EE /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				0AE29E212B99F38600CF8A92 /* OnBoarding */,
 				0A6D4C092B864A5F007532EE /* Home */,
 				0AA1718C2B90E63E00BE39B4 /* Settings */,
 			);
@@ -119,12 +124,21 @@
 		0AA1718C2B90E63E00BE39B4 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				0AA171882B90D1B700BE39B4 /* SettingsVC.swift */,
+				0AA171882B90D1B700BE39B4 /* SettingsView.swift */,
 				0AA1718F2B90F2EC00BE39B4 /* SettingsModel.swift */,
 				0AB6E6842B96595400B8F6FF /* SettingsController.swift */,
 				0AA1718D2B90E69D00BE39B4 /* SettingsCell.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		0AE29E212B99F38600CF8A92 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				0AE29E222B99F3AE00CF8A92 /* OnBoardingView.swift */,
+				0AE29E242B99F4DC00CF8A92 /* OnBoardCell.swift */,
+			);
+			path = OnBoarding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,10 +222,12 @@
 				0A21E7B92B8E700E007066EC /* HomeModel.swift in Sources */,
 				0A6D4BF42B86433C007532EE /* SceneDelegate.swift in Sources */,
 				0A6D4C0B2B864A77007532EE /* NoteCell.swift in Sources */,
+				0AE29E232B99F3AE00CF8A92 /* OnBoardingView.swift in Sources */,
 				0AA171902B90F2EC00BE39B4 /* SettingsModel.swift in Sources */,
 				0AB6E6852B96595400B8F6FF /* SettingsController.swift in Sources */,
 				0A21E7B72B8E6FF9007066EC /* HomeController.swift in Sources */,
-				0AA171892B90D1B700BE39B4 /* SettingsVC.swift in Sources */,
+				0AE29E252B99F4DC00CF8A92 /* OnBoardCell.swift in Sources */,
+				0AA171892B90D1B700BE39B4 /* SettingsView.swift in Sources */,
 				0AA1718E2B90E69D00BE39B4 /* SettingsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -67,8 +67,18 @@ class HomeView: UIViewController {
         controller?.onGetNotes()
     }
     
-    private func setupUI(){
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.hidesBackButton = true
         setupNavigationItem()
+        if UserDefaults.standard.bool(forKey: "theme") == true {
+            view.overrideUserInterfaceStyle = .dark
+        } else {
+            view.overrideUserInterfaceStyle = .light
+        }
+    }
+    
+    private func setupUI(){
         setupSearchBar()
         setupTitle()
         setupNotesCollections()
@@ -77,16 +87,19 @@ class HomeView: UIViewController {
 
     private func setupNavigationItem() {
         navigationItem.title = "Home"
-        
-        let image = UIImage(named: "settings")
-        let resizedImage = image?.resized(to: CGSize(width: 25, height: 25))
-        let rightBarButtonItem = UIBarButtonItem(image: resizedImage, style: .plain, target: self, action: #selector(settingsButtonTapped))
-        rightBarButtonItem.tintColor = .black
+        let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(settingsButtonTapped))
+        if UserDefaults.standard.bool(forKey: "theme") == true {
+            rightBarButtonItem.tintColor = .white
+            navigationController?.navigationBar.standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        } else {
+            rightBarButtonItem.tintColor = .black
+            navigationController?.navigationBar.standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
+        }
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
     @objc func settingsButtonTapped(_ sender:UIButton){
-        let vc = SettingsVC()
+        let vc = SettingsView()
         navigationController?.pushViewController(vc, animated: true)
     }
     

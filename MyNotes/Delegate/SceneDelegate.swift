@@ -13,10 +13,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { 
+            return
+        }
+        var rootViewController: UIViewController?
         let window = UIWindow(windowScene: windowScene)
-        let nav1 = UINavigationController(rootViewController: HomeView())
-        window.rootViewController = nav1 // синяя стрелка
+
+        if UserDefaults.standard.bool(forKey: "isOnBoardShown") == true || UserDefaults.standard.bool(forKey: "isOnboardingSkipped") == true {
+            rootViewController = HomeView()
+        } else {
+            rootViewController = OnBoardingView()
+        }
+
+        let navigationController = UINavigationController(rootViewController: rootViewController!)
+        
+        window.rootViewController = navigationController
         self.window = window
         self.window?.makeKeyAndVisible()
     }

@@ -48,6 +48,7 @@ class SettingsCell: UITableViewCell {
     
     var switchButton: UISwitch = {
         let view = UISwitch()
+        view.isOn = UserDefaults.standard.bool(forKey: "theme")
         view.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
         return view
     }()
