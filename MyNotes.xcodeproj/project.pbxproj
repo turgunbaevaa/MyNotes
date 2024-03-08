@@ -22,6 +22,8 @@
 		0AB6E6852B96595400B8F6FF /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6E6842B96595400B8F6FF /* SettingsController.swift */; };
 		0AE29E232B99F3AE00CF8A92 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE29E222B99F3AE00CF8A92 /* OnBoardingView.swift */; };
 		0AE29E252B99F4DC00CF8A92 /* OnBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE29E242B99F4DC00CF8A92 /* OnBoardCell.swift */; };
+		0AE29E292B9B477100CF8A92 /* Extension+UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE29E282B9B477100CF8A92 /* Extension+UIColor.swift */; };
+		0AE29E2B2B9B525200CF8A92 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AE29E2A2B9B525200CF8A92 /* NotesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		0AB6E6842B96595400B8F6FF /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		0AE29E222B99F3AE00CF8A92 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		0AE29E242B99F4DC00CF8A92 /* OnBoardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardCell.swift; sourceTree = "<group>"; };
+		0AE29E282B9B477100CF8A92 /* Extension+UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIColor.swift"; sourceTree = "<group>"; };
+		0AE29E2A2B9B525200CF8A92 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +89,8 @@
 		0A6D4C082B864A28007532EE /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				0AE29E272B9B475200CF8A92 /* SupportFiles */,
+				0AE29E262B9B410C00CF8A92 /* Notes */,
 				0AE29E212B99F38600CF8A92 /* OnBoarding */,
 				0A6D4C092B864A5F007532EE /* Home */,
 				0AA1718C2B90E63E00BE39B4 /* Settings */,
@@ -139,6 +145,22 @@
 				0AE29E242B99F4DC00CF8A92 /* OnBoardCell.swift */,
 			);
 			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		0AE29E262B9B410C00CF8A92 /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				0AE29E2A2B9B525200CF8A92 /* NotesView.swift */,
+			);
+			path = Notes;
+			sourceTree = "<group>";
+		};
+		0AE29E272B9B475200CF8A92 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				0AE29E282B9B477100CF8A92 /* Extension+UIColor.swift */,
+			);
+			path = SupportFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AE29E2B2B9B525200CF8A92 /* NotesView.swift in Sources */,
 				0A6D4BF62B86433C007532EE /* HomeView.swift in Sources */,
 				0A6D4BF22B86433C007532EE /* AppDelegate.swift in Sources */,
 				0A21E7B92B8E700E007066EC /* HomeModel.swift in Sources */,
@@ -228,6 +251,7 @@
 				0A21E7B72B8E6FF9007066EC /* HomeController.swift in Sources */,
 				0AE29E252B99F4DC00CF8A92 /* OnBoardCell.swift in Sources */,
 				0AA171892B90D1B700BE39B4 /* SettingsView.swift in Sources */,
+				0AE29E292B9B477100CF8A92 /* Extension+UIColor.swift in Sources */,
 				0AA1718E2B90E69D00BE39B4 /* SettingsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

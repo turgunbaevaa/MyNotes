@@ -44,7 +44,7 @@ class OnBoardingView: UIViewController {
         view.setTitle("Next", for: .normal)
         view.setTitleColor(.white, for: .normal)
         view.layer.cornerRadius = 21
-        view.backgroundColor = .red
+        view.backgroundColor = UIColor().rgb(r: 255, g: 61, b: 61, alpha: 1)
         return view
     }()
     

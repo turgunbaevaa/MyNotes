@@ -24,11 +24,14 @@ class NoteCell: UICollectionViewCell {
     
     //var indexHandler: ([String]) -> ()
     
-    let colors: [UIColor] = [.systemCyan, .systemPink, .systemCyan, .systemYellow]
+    let colors: [UIColor] = [UIColor().rgb(r: 217, g: 187, b: 249, alpha: 1),
+                             UIColor().rgb(r: 215, g: 247, b: 242, alpha: 1),
+                             UIColor().rgb(r: 215, g: 237, b: 248, alpha: 1),
+                             UIColor().rgb(r: 255, g: 245, b: 225, alpha: 1)]
     
     weak var delegate: NoteCellDelegate?
     
-    private lazy var titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Notes"
         label.font = UIFont.systemFont(ofSize: 16)

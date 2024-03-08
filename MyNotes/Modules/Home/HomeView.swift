@@ -23,9 +23,12 @@ class HomeView: UIViewController {
     
     private var notes: [String] = []
     
+    private var filteredNotes: [String] = []
+    
     private lazy var searchBar: UISearchBar = {
         let view = UISearchBar()
         view.placeholder = "Search"
+        view.searchTextField.addTarget(self, action: #selector(noteSearchBarEditingChanged), for: .editingChanged)
         return view
     }()
     
@@ -52,7 +55,7 @@ class HomeView: UIViewController {
         button.setTitle("+", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 24)
-        button.backgroundColor = .red
+        button.backgroundColor = UIColor().rgb(r: 255, g: 61, b: 61, alpha: 1)
         button.layer.cornerRadius = 42/2
         return button
     }()
@@ -107,6 +110,36 @@ class HomeView: UIViewController {
 //        indexHandler(notes)
 //    }
     
+    @objc func noteSearchBarEditingChanged(_ sender:UIButton){
+        if let text = searchBar.text {
+            filteredNotes = []
+            if text.isEmpty {
+                filteredNotes = notes
+            } else {
+                filteredNotes = notes.filter({ note in
+                    note.lowercased().contains(text.lowercased())
+                })
+            }
+            notesCollectionView.reloadData()
+        }
+    }
+    
+//    @objc func addButtonEditingChanged(){
+//        if let text = searchBar.text {
+//            
+//            if text.isEmpty {
+//                addButton.backgroundColor = .lightGray
+//                addButton.isEnabled = false
+//            } else {
+//                addButton.backgroundColor = .red
+//                addButton.isEnabled = true
+//                //при первом открытии кнопка должна быть уже серой и только после заполнения красным
+//                //это можно сделать при составлении функции для кнопки view.backgroundColor = .lightGray
+//                //view.isEnabled = false
+//            }
+//        }
+//    }
+    
     private func setupSearchBar(){
         view.addSubview(searchBar)
         searchBar.snp.makeConstraints { make in
@@ -139,19 +172,27 @@ class HomeView: UIViewController {
             make.centerX.equalTo(view.snp.centerX)
             make.height.width.equalTo(42)
         }
+        addButton.addTarget(self, action: #selector(addNotesButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func addNotesButtonTapped(){
+        let vc = NotesView()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension HomeView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return notes.count
+        return filteredNotes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoteCell.reuseID, for: indexPath) as! NoteCell
-        cell.fill(title: notes[indexPath.row])
+        cell.fill(title: filteredNotes[indexPath.row])
         cell.index = indexPath.row
         cell.delegate = self 
+        // Установила цвет текста ячейки черным
+        cell.titleLabel.textColor = .black
         print(indexPath)
         return cell
     }
@@ -166,6 +207,7 @@ extension HomeView: UICollectionViewDelegateFlowLayout {
 extension HomeView: HomeViewProtocol {
     func successNotes(notes: [String]) {
         self.notes = notes
+        self.filteredNotes = notes
         notesCollectionView.reloadData()
     }
 }
@@ -189,4 +231,8 @@ extension HomeView: NoteCellDelegate {
         let cell = notesCollectionView.cellForItem(at: [0, index]) as? NoteCell
         cell?.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
     }
+}
+
+extension HomeView: UISearchBarDelegate {
+    
 }
