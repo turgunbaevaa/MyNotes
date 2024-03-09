@@ -8,6 +8,8 @@ protocol HomeControllerProtocol {
     func onGetNotes()
     
     func onSuccessNotes(notes: [String])
+    
+    func onSearchText(text: String)
 }
  
 class HomeController: HomeControllerProtocol {
@@ -26,5 +28,9 @@ class HomeController: HomeControllerProtocol {
     
     func onSuccessNotes(notes: [String]) {
         view?.successNotes(notes: notes)
+    }
+    
+    func onSearchText(text: String) {
+        model?.getSearchedNote(text: text)
     }
 }

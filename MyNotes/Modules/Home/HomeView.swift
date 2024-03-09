@@ -111,17 +111,7 @@ class HomeView: UIViewController {
 //    }
     
     @objc func noteSearchBarEditingChanged(_ sender:UIButton){
-        if let text = searchBar.text {
-            filteredNotes = []
-            if text.isEmpty {
-                filteredNotes = notes
-            } else {
-                filteredNotes = notes.filter({ note in
-                    note.lowercased().contains(text.lowercased())
-                })
-            }
-            notesCollectionView.reloadData()
-        }
+        controller?.onSearchText(text: searchBar.text!)
     }
     
 //    @objc func addButtonEditingChanged(){
