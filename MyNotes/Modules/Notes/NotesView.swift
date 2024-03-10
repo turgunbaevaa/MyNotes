@@ -10,6 +10,8 @@ import SnapKit
 
 class NotesView: UIViewController {
     
+    private let coreDataService = CoreDataService.shared
+    
     private lazy var titleBox: UITextView = {
         let view = UITextView()
         view.autocorrectionType = .no
@@ -37,7 +39,7 @@ class NotesView: UIViewController {
         view.setTitleColor(.white, for: .normal)
         view.layer.cornerRadius = 10
         view.backgroundColor = UIColor().rgb(r: 255, g: 61, b: 61, alpha: 1)
-        view.isEnabled = false
+        //view.isEnabled = false
         return view
     }()
     
@@ -81,5 +83,17 @@ class NotesView: UIViewController {
             make.trailing.equalTo(view.snp.trailing).offset(-22)
             make.height.equalTo(42)
         }
+        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func saveButtonTapped(){
+        let id = UUID().uuidString
+        
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
+        let dateString = dateFormatter.string(from: date)
+        
+        coreDataService.addNote(id: id, title: titleBox.text ?? "", description: textBox.text ?? "", date: dateString )
     }
 }

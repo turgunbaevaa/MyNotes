@@ -17,10 +17,14 @@ class HomeModel: HomeModelProtocol {
         self.controller = controller
     }
     
-    private var notes: [String] = ["Do a homework", "Go to the gym", "Buy a ticket", "Submit tasks"]
-    private var filteredNotes: [String] = []
+    private var notes: [Note] = []
+    
+    private var filteredNotes: [Note] = []
+    
+    private let coreDataService = CoreDataService.shared
     
     func getNotes() {
+        notes = coreDataService.fetchNotes()
         controller?.onSuccessNotes(notes: notes)
     }
     
@@ -30,7 +34,7 @@ class HomeModel: HomeModelProtocol {
             filteredNotes = notes
         } else {
             filteredNotes = notes.filter { note in
-                note.lowercased().contains(text.lowercased())
+                note.title!.lowercased().contains(text.lowercased())
             }
         }
         controller?.onSuccessNotes(notes: filteredNotes)

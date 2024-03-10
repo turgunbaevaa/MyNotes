@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 protocol HomeViewProtocol {
-    func successNotes(notes: [String])
+    func successNotes(notes: [Note])
 }
 
 //struct Note {
@@ -21,9 +21,9 @@ class HomeView: UIViewController {
     
     private var controller: HomeControllerProtocol?
     
-    private var notes: [String] = []
+    private var notes: [Note] = []
     
-    private var filteredNotes: [String] = []
+    private var filteredNotes: [Note] = []
     
     private lazy var searchBar: UISearchBar = {
         let view = UISearchBar()
@@ -178,7 +178,7 @@ extension HomeView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoteCell.reuseID, for: indexPath) as! NoteCell
-        cell.fill(title: filteredNotes[indexPath.row])
+        cell.fill(title: filteredNotes[indexPath.row].title ?? "")
         cell.index = indexPath.row
         cell.delegate = self 
         // Установила цвет текста ячейки черным
@@ -195,7 +195,7 @@ extension HomeView: UICollectionViewDelegateFlowLayout {
 }
 
 extension HomeView: HomeViewProtocol {
-    func successNotes(notes: [String]) {
+    func successNotes(notes: [Note]) {
         self.notes = notes
         self.filteredNotes = notes
         notesCollectionView.reloadData()
