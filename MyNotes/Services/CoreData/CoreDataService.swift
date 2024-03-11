@@ -46,4 +46,10 @@ class CoreDataService {
         }
         return []
     }
+    
+    func deleteNote(note: Note) {
+        context.delete(note)
+        appDelegate.saveContext()
+    }
+    
 }

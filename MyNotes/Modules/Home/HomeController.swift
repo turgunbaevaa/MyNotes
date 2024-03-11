@@ -10,8 +10,10 @@ protocol HomeControllerProtocol {
     func onSuccessNotes(notes: [Note])
     
     func onSearchText(text: String)
+    
+    func deleteNoteAtIndex(index: Int)
 }
- 
+
 class HomeController: HomeControllerProtocol {
     
     private var view: HomeViewProtocol?
@@ -32,5 +34,9 @@ class HomeController: HomeControllerProtocol {
     
     func onSearchText(text: String) {
         model?.getSearchedNote(text: text)
+    }
+    
+    func deleteNoteAtIndex(index: Int) {
+        model?.deleteNoteAtIndex(index: index)
     }
 }

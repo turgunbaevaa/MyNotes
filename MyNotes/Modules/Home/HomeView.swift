@@ -87,7 +87,7 @@ class HomeView: UIViewController {
         setupNotesCollections()
         setupButton()
     }
-
+    
     private func setupNavigationItem() {
         navigationItem.title = "Home"
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(settingsButtonTapped))
@@ -106,29 +106,29 @@ class HomeView: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-//    func likeButtonHandler(indexHandler: ([String]) -> ()){
-//        indexHandler(notes)
-//    }
+    //    func likeButtonHandler(indexHandler: ([String]) -> ()){
+    //        indexHandler(notes)
+    //    }
     
     @objc func noteSearchBarEditingChanged(_ sender:UIButton){
         controller?.onSearchText(text: searchBar.text!)
     }
     
-//    @objc func addButtonEditingChanged(){
-//        if let text = searchBar.text {
-//            
-//            if text.isEmpty {
-//                addButton.backgroundColor = .lightGray
-//                addButton.isEnabled = false
-//            } else {
-//                addButton.backgroundColor = .red
-//                addButton.isEnabled = true
-//                //при первом открытии кнопка должна быть уже серой и только после заполнения красным
-//                //это можно сделать при составлении функции для кнопки view.backgroundColor = .lightGray
-//                //view.isEnabled = false
-//            }
-//        }
-//    }
+    //    @objc func addButtonEditingChanged(){
+    //        if let text = searchBar.text {
+    //
+    //            if text.isEmpty {
+    //                addButton.backgroundColor = .lightGray
+    //                addButton.isEnabled = false
+    //            } else {
+    //                addButton.backgroundColor = .red
+    //                addButton.isEnabled = true
+    //                //при первом открытии кнопка должна быть уже серой и только после заполнения красным
+    //                //это можно сделать при составлении функции для кнопки view.backgroundColor = .lightGray
+    //                //view.isEnabled = false
+    //            }
+    //        }
+    //    }
     
     private func setupSearchBar(){
         view.addSubview(searchBar)
@@ -180,7 +180,7 @@ extension HomeView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoteCell.reuseID, for: indexPath) as! NoteCell
         cell.fill(title: filteredNotes[indexPath.row].title ?? "")
         cell.index = indexPath.row
-        cell.delegate = self 
+        cell.delegate = self
         // Установила цвет текста ячейки черным
         cell.titleLabel.textColor = .black
         print(indexPath)
@@ -213,8 +213,7 @@ extension UIImage {
 extension HomeView: NoteCellDelegate {
     
     func didRemoveButton(index: Int) {
-        notes.remove(at: index)
-        notesCollectionView.reloadData()
+        controller?.deleteNoteAtIndex(index: index)
     }
     
     func didLikedButton(index: Int) {
