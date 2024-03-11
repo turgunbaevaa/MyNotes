@@ -67,7 +67,7 @@ class HomeView: UIViewController {
         view.backgroundColor = .systemBackground
         setupUI()
         controller = HomeController(view: self)
-        controller?.onGetNotes()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,6 +79,7 @@ class HomeView: UIViewController {
         } else {
             view.overrideUserInterfaceStyle = .light
         }
+        controller?.onGetNotes() 
     }
     
     private func setupUI(){
@@ -191,6 +192,12 @@ extension HomeView: UICollectionViewDataSource {
 extension HomeView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (collectionView.frame.width - 12 ) / 2 , height: 100)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let notesView = NotesView()
+        notesView.note = filteredNotes[indexPath.row]
+        navigationController?.pushViewController(notesView, animated: true)
     }
 }
 

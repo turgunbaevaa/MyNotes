@@ -51,5 +51,4 @@ class CoreDataService {
         context.delete(note)
         appDelegate.saveContext()
     }
-    
 }

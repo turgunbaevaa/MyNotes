@@ -12,6 +12,8 @@ class NotesView: UIViewController {
     
     private let coreDataService = CoreDataService.shared
     
+    var note: Note?
+    
     private lazy var titleBox: UITextView = {
         let view = UITextView()
         view.autocorrectionType = .no
@@ -47,6 +49,11 @@ class NotesView: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupUI()
+        guard let note = note else {
+            return
+        } 
+        titleBox.text = note.title
+        textBox.text = note.desc
     }
     
     private func setupUI(){
