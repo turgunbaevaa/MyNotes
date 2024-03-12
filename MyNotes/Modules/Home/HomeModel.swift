@@ -7,7 +7,6 @@
 protocol HomeModelProtocol {
     func getNotes()
     func getSearchedNote(text: String)
-    func deleteNoteAtIndex(index: Int)
 }
 
 class HomeModel: HomeModelProtocol {
@@ -39,17 +38,5 @@ class HomeModel: HomeModelProtocol {
             }
         }
         controller?.onSuccessNotes(notes: filteredNotes)
-    }
-    
-    func deleteNoteAtIndex(index: Int) {
-        // Ensure that index is within bounds
-        guard index >= 0, index < notes.count else {
-            return
-        }
-        
-        let noteToDelete = notes[index]
-        CoreDataService.shared.deleteNote(note: noteToDelete)
-        notes.remove(at: index)
-        controller?.onSuccessNotes(notes: notes)
     }
 }

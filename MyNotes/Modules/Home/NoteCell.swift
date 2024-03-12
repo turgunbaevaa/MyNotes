@@ -9,8 +9,6 @@ import UIKit
 import SnapKit
 
 protocol NoteCellDelegate: AnyObject {
-    func didRemoveButton(index: Int)
-    
     func didLikedButton(index: Int)
 }
 
@@ -21,9 +19,7 @@ class NoteCell: UICollectionViewCell {
     var view: HomeView?
     
     var index: Int?
-    
-    //var indexHandler: ([String]) -> ()
-    
+        
     let colors: [UIColor] = [UIColor().rgb(r: 217, g: 187, b: 249, alpha: 1),
                              UIColor().rgb(r: 215, g: 237, b: 248, alpha: 1)]
                              
@@ -37,13 +33,13 @@ class NoteCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var deleteButton: UIButton = {
-        let btn = UIButton(type: .system)
-        btn.setImage(UIImage(systemName: "trash"), for: .normal)
-        btn.tintColor = .black
-        btn.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
-        return btn
-    }()
+//    private lazy var deleteButton: UIButton = {
+//        let btn = UIButton(type: .system)
+//        btn.setImage(UIImage(systemName: "trash"), for: .normal)
+//        btn.tintColor = .black
+//        btn.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+//        return btn
+//    }()
     
     lazy var likeButton: UIButton = {
         let btn = UIButton(type: .system)
@@ -60,13 +56,13 @@ class NoteCell: UICollectionViewCell {
         setupConstraints()
     }
     
-    @objc private func deleteButtonTapped(){
-        print("delete")
-        guard let index = index else {
-            return
-        }
-        delegate?.didRemoveButton(index: index)
-    }
+//    @objc private func deleteButtonTapped(){
+//        print("delete")
+//        guard let index = index else {
+//            return
+//        }
+//        delegate?.didRemoveButton(index: index)
+//    }
     
     var isLiked = false
     
@@ -102,17 +98,10 @@ class NoteCell: UICollectionViewCell {
             make.bottom.equalToSuperview().offset(-10)
         }
         
-        contentView.addSubview(deleteButton)
-        deleteButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.height.width.equalTo(40 )
-        }
-        
         contentView.addSubview(likeButton)
         likeButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
-            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
             make.height.width.equalTo(40)
         }
     }

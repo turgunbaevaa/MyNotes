@@ -107,10 +107,6 @@ class HomeView: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    //    func likeButtonHandler(indexHandler: ([String]) -> ()){
-    //        indexHandler(notes)
-    //    }
-    
     @objc func noteSearchBarEditingChanged(_ sender:UIButton){
         controller?.onSearchText(text: searchBar.text!)
     }
@@ -218,11 +214,7 @@ extension UIImage {
 }
 
 extension HomeView: NoteCellDelegate {
-    
-    func didRemoveButton(index: Int) {
-        controller?.deleteNoteAtIndex(index: index)
-    }
-    
+
     func didLikedButton(index: Int) {
         let cell = notesCollectionView.cellForItem(at: [0, index]) as? NoteCell
         cell?.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)

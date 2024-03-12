@@ -17,6 +17,8 @@ class SettingsView: UIViewController {
     //weak var controller: SettingsViewProtocol?
     var controller: SettingsControllerProtocol?
     
+    var coreDataService = CoreDataService.shared
+    
     private let settingsTableView = UITableView()
     
     private var settings: [Settings] = [
@@ -91,6 +93,12 @@ extension SettingsView: UITableViewDataSource {
 extension SettingsView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 2 {
+            //TODO: change after (alert with confirmation)
+            coreDataService.deleteNotes()
+        }
     }
 }
 

@@ -8,6 +8,12 @@
 import UIKit
 import CoreData
 
+//CRUD - Create Read Update Delete
+//POST - Create
+//GET(FETCH) - Read
+//PUT(PATCH) - Update
+//DELETE - Delete
+
 class CoreDataService {
     
     static var shared = CoreDataService()
@@ -24,6 +30,7 @@ class CoreDataService {
         appDelegate.persistentContainer.viewContext
     }
     
+    //post запрос
     func addNote(id: String, title: String, description: String, date: String){
         guard let noteEntity = NSEntityDescription.entity(forEntityName: "Note", in: context) else {
             return
@@ -37,6 +44,7 @@ class CoreDataService {
         appDelegate.saveContext()
     }
     
+    //read запрос
     func fetchNotes() -> [Note] {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
         do {
@@ -47,8 +55,54 @@ class CoreDataService {
         return []
     }
     
-    func deleteNote(note: Note) {
-        context.delete(note)
+    //update запрос
+    func updateNote(id: String, title: String, description: String, date: String){
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
+        do {
+            guard let notes = try context.fetch(fetchRequest) as? [Note], let note = notes.first(where: { note in
+                note.id == id
+            }) else {
+                return
+            }
+                    note.title = title
+                    note.desc = description
+                    note.date = date
+        } catch {
+            print(error.localizedDescription)
+        }
         appDelegate.saveContext()
     }
+    
+    //delete запрос
+    func deleteNote(id: String) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
+        do {
+            guard let notes = try context.fetch(fetchRequest) as? [Note], let note = notes.first(where: { note in
+                note.id == id
+            }) else {
+                return
+            }
+            context.delete(note)
+        } catch {
+            print(error.localizedDescription)
+        }
+        appDelegate.saveContext()
+    }
+    
+    func deleteNotes(){
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
+        
+        do {
+            guard let notes = try context.fetch(fetchRequest) as? [Note] else {
+                return
+            }
+            notes.forEach { note in
+                context.delete(note)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+        appDelegate.saveContext()
+    }
+    
 }

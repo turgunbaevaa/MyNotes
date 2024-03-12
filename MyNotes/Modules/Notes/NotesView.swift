@@ -49,11 +49,26 @@ class NotesView: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupUI()
+        setupNavigationItem()
         guard let note = note else {
             return
         } 
         titleBox.text = note.title
         textBox.text = note.desc
+    }
+    
+    private func setupNavigationItem() {
+        let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(trashButtonTapped))
+        navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
+    
+    @objc func trashButtonTapped(){
+        guard let note = note else {
+            return
+        }
+        coreDataService.deleteNote(id: note.id ?? "")
+        //TODO: change after (with alert depending on the respons of the CoreData)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     private func setupUI(){
@@ -94,13 +109,19 @@ class NotesView: UIViewController {
     }
     
     @objc func saveButtonTapped(){
-        let id = UUID().uuidString
-        
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
         let dateString = dateFormatter.string(from: date)
-        
-        coreDataService.addNote(id: id, title: titleBox.text ?? "", description: textBox.text ?? "", date: dateString )
+        if let note = note {
+            coreDataService.updateNote(id: note.id!, title: titleBox.text ?? "", description: textBox.text ?? "", date: dateString)
+            //TODO: change after (with alert depending on the respons of the CoreData)
+            navigationController?.popToRootViewController(animated: true)
+        } else {
+            let id = UUID().uuidString
+            coreDataService.addNote(id: id, title: titleBox.text ?? "", description: textBox.text ?? "", date: dateString)
+            //TODO: change after (with alert depending on the respons of the CoreData)
+            navigationController?.popToRootViewController(animated: true)
+        }
     }
 }
