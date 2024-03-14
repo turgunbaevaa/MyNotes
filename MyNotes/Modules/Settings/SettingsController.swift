@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SettingsControllerProtocol: AnyObject {
-    
+    func deleteNotes()
 }
 
 class SettingsController {
@@ -22,5 +22,7 @@ class SettingsController {
 }
 
 extension SettingsController: SettingsControllerProtocol {
-    
+    func deleteNotes() {
+        view?.successDeletedNotes()
+    }
 }

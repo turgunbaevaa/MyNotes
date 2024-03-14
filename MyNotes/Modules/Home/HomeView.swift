@@ -12,18 +12,11 @@ protocol HomeViewProtocol {
     func successNotes(notes: [Note])
 }
 
-//struct Note {
-//    var title: String
-//    var liked: Bool
-//}
-
 class HomeView: UIViewController {
     
     private var controller: HomeControllerProtocol?
     
     private var notes: [Note] = []
-    
-    private var filteredNotes: [Note] = []
     
     private lazy var searchBar: UISearchBar = {
         let view = UISearchBar()
@@ -67,7 +60,6 @@ class HomeView: UIViewController {
         view.backgroundColor = .systemBackground
         setupUI()
         controller = HomeController(view: self)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,24 +100,8 @@ class HomeView: UIViewController {
     }
     
     @objc func noteSearchBarEditingChanged(_ sender:UIButton){
-        controller?.onSearchText(text: searchBar.text!)
+        controller?.onNoteSearch(text: searchBar.text ?? "")
     }
-    
-    //    @objc func addButtonEditingChanged(){
-    //        if let text = searchBar.text {
-    //
-    //            if text.isEmpty {
-    //                addButton.backgroundColor = .lightGray
-    //                addButton.isEnabled = false
-    //            } else {
-    //                addButton.backgroundColor = .red
-    //                addButton.isEnabled = true
-    //                //при первом открытии кнопка должна быть уже серой и только после заполнения красным
-    //                //это можно сделать при составлении функции для кнопки view.backgroundColor = .lightGray
-    //                //view.isEnabled = false
-    //            }
-    //        }
-    //    }
     
     private func setupSearchBar(){
         view.addSubview(searchBar)
@@ -163,24 +139,20 @@ class HomeView: UIViewController {
     }
     
     @objc func addNotesButtonTapped(){
-        let vc = NotesView()
+        let vc = NoteView()
         navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension HomeView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filteredNotes.count
+        return notes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NoteCell.reuseID, for: indexPath) as! NoteCell
-        cell.fill(title: filteredNotes[indexPath.row].title ?? "")
-        cell.index = indexPath.row
-        cell.delegate = self
-        // Установила цвет текста ячейки черным
+        cell.fill(title: notes[indexPath.row].title ?? "")
         cell.titleLabel.textColor = .black
-        print(indexPath)
         return cell
     }
 }
@@ -191,8 +163,8 @@ extension HomeView: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let notesView = NotesView()
-        notesView.note = filteredNotes[indexPath.row]
+        let notesView = NoteView()
+        notesView.note = notes[indexPath.row]
         navigationController?.pushViewController(notesView, animated: true)
     }
 }
@@ -200,27 +172,6 @@ extension HomeView: UICollectionViewDelegateFlowLayout {
 extension HomeView: HomeViewProtocol {
     func successNotes(notes: [Note]) {
         self.notes = notes
-        self.filteredNotes = notes
         notesCollectionView.reloadData()
     }
-}
-
-extension UIImage {
-    func resized(to newSize: CGSize) -> UIImage {
-        return UIGraphicsImageRenderer(size: newSize).image { _ in
-            draw(in: CGRect(origin: .zero, size: newSize))
-        }
-    }
-}
-
-extension HomeView: NoteCellDelegate {
-
-    func didLikedButton(index: Int) {
-        let cell = notesCollectionView.cellForItem(at: [0, index]) as? NoteCell
-        cell?.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-    }
-}
-
-extension HomeView: UISearchBarDelegate {
-    
 }

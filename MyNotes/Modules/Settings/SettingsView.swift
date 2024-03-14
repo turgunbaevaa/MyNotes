@@ -9,12 +9,11 @@ import UIKit
 import SnapKit
 
 protocol SettingsViewProtocol {
-    
+    func successDeletedNotes()
 }
 
 class SettingsView: UIViewController {
     
-    //weak var controller: SettingsViewProtocol?
     var controller: SettingsControllerProtocol?
     
     var coreDataService = CoreDataService.shared
@@ -59,7 +58,6 @@ class SettingsView: UIViewController {
             navigationController?.navigationBar.standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
         }
     }
-
     
     private func setupSettingsTableView(){
         settingsTableView.register(SettingsCell.self, forCellReuseIdentifier: SettingsCell.reuseID)
@@ -70,10 +68,6 @@ class SettingsView: UIViewController {
             make.horizontalEdges.equalToSuperview().inset(15)
             make.height.equalTo(150)
         }
-    }
-    
-    @objc func settingsButtonTapped(_ sender: UIButton){
-        
     }
 }
 
@@ -103,7 +97,9 @@ extension SettingsView: UITableViewDelegate {
 }
 
 extension SettingsView: SettingsViewProtocol {
-    
+    func successDeletedNotes() {
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 extension SettingsView: SettingsCellDelegate {

@@ -27,6 +27,7 @@ protocol SettingsCellDelegate: AnyObject {
 
 class SettingsCell: UITableViewCell {
     
+    private let coreDataService = CoreDataService.shared
     static let reuseID = "settings_cell"
     
     weak var delegate: SettingsCellDelegate?
@@ -49,7 +50,7 @@ class SettingsCell: UITableViewCell {
     var switchButton: UISwitch = {
         let view = UISwitch()
         view.isOn = UserDefaults.standard.bool(forKey: "theme")
-        view.addTarget(self, action: #selector(switchValueChanged), for: .valueChanged)
+        view.addTarget(SettingsCell.self, action: #selector(switchValueChanged), for: .valueChanged)
         return view
     }()
     
@@ -122,7 +123,5 @@ class SettingsCell: UITableViewCell {
             make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(40)
         }
-//        switchButton.addTarget(self, action: #selector(switchButtonTapped), for: .valueChanged)
     }
 }
-

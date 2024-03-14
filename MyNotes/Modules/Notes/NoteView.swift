@@ -1,5 +1,5 @@
 //
-//  NotesView.swift
+//  NoteView.swift
 //  MyNotes
 //
 //  Created by Aruuke Turgunbaeva on 8/3/24.
@@ -8,7 +8,19 @@
 import UIKit
 import SnapKit
 
-class NotesView: UIViewController {
+protocol NoteViewProtocol {
+    func successAddNote()
+    
+    func successDeleteNote()
+    
+    func successUpdatedNote()
+    
+    func failureNote()
+}
+
+class NoteView: UIViewController {
+    
+    var controller: NoteControllerProtocol?
     
     private let coreDataService = CoreDataService.shared
     
@@ -41,12 +53,12 @@ class NotesView: UIViewController {
         view.setTitleColor(.white, for: .normal)
         view.layer.cornerRadius = 10
         view.backgroundColor = UIColor().rgb(r: 255, g: 61, b: 61, alpha: 1)
-        //view.isEnabled = false
         return view
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        controller = NoteController(view: self)
         view.backgroundColor = .systemBackground
         setupUI()
         setupNavigationItem()
@@ -123,5 +135,23 @@ class NotesView: UIViewController {
             //TODO: change after (with alert depending on the respons of the CoreData)
             navigationController?.popToRootViewController(animated: true)
         }
+    }
+}
+
+extension NoteView: NoteViewProtocol {
+    func successAddNote() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func successDeleteNote() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func successUpdatedNote() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func failureNote() {
+        ()
     }
 }

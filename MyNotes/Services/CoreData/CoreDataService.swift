@@ -89,8 +89,8 @@ class CoreDataService {
         appDelegate.saveContext()
     }
     
-    func deleteNotes(){
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
+    func deleteNotes() {
+        let fetchRequest = NSFetchRequest<Note>(entityName: "Note")
         
         do {
             guard let notes = try context.fetch(fetchRequest) as? [Note] else {
@@ -100,9 +100,8 @@ class CoreDataService {
                 context.delete(note)
             }
         } catch {
-            print(error.localizedDescription)
+            print("Error deleting notes: \(error.localizedDescription)")
         }
         appDelegate.saveContext()
     }
-    
 }

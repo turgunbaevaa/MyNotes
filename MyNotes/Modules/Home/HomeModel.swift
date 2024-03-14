@@ -6,6 +6,7 @@
 //
 protocol HomeModelProtocol {
     func getNotes()
+     
     func getSearchedNote(text: String)
 }
 
@@ -32,11 +33,12 @@ class HomeModel: HomeModelProtocol {
         filteredNotes = []
         if text.isEmpty {
             filteredNotes = notes
+            controller?.onSuccessNotes(notes: notes)
         } else {
             filteredNotes = notes.filter { note in
                 note.title!.lowercased().contains(text.lowercased())
             }
+            controller?.onSuccessNotes(notes: filteredNotes)
         }
-        controller?.onSuccessNotes(notes: filteredNotes)
     }
 }

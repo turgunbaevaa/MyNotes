@@ -17,12 +17,9 @@ class NoteCell: UICollectionViewCell {
     static var reuseID = "note_cell"
     
     var view: HomeView?
-    
-    var index: Int?
         
     let colors: [UIColor] = [UIColor().rgb(r: 217, g: 187, b: 249, alpha: 1),
                              UIColor().rgb(r: 215, g: 237, b: 248, alpha: 1)]
-                             
     
     weak var delegate: NoteCellDelegate?
     
@@ -33,52 +30,11 @@ class NoteCell: UICollectionViewCell {
         return label
     }()
     
-//    private lazy var deleteButton: UIButton = {
-//        let btn = UIButton(type: .system)
-//        btn.setImage(UIImage(systemName: "trash"), for: .normal)
-//        btn.tintColor = .black
-//        btn.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
-//        return btn
-//    }()
-    
-    lazy var likeButton: UIButton = {
-        let btn = UIButton(type: .system)
-        btn.setImage(UIImage(systemName: "heart"), for: .normal)
-        btn.tintColor = .black
-        btn.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
-        return btn
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.cornerRadius = 10
         backgroundColor = colors.randomElement()
         setupConstraints()
-    }
-    
-//    @objc private func deleteButtonTapped(){
-//        print("delete")
-//        guard let index = index else {
-//            return
-//        }
-//        delegate?.didRemoveButton(index: index)
-//    }
-    
-    var isLiked = false
-    
-    @objc func likeButtonTapped() {
-        if isLiked {
-            likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-            isLiked = false
-        } else {
-            likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            isLiked = true
-        }
-        guard let index = index else {
-            return
-        }
-        delegate?.didLikedButton(index: index)
-        print("liked")
     }
     
     required init?(coder: NSCoder) {
@@ -96,13 +52,6 @@ class NoteCell: UICollectionViewCell {
             make.trailing.equalToSuperview().offset(-10)
             make.top.equalToSuperview().offset(10)
             make.bottom.equalToSuperview().offset(-10)
-        }
-        
-        contentView.addSubview(likeButton)
-        likeButton.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.height.width.equalTo(40)
         }
     }
 }
