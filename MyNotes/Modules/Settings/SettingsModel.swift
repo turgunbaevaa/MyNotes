@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SettingsModelProtocol {
-    func deleteNotes(indexPath: IndexPath)
+    func deleteNotes()
 }
 
 class SettingsModel: SettingsModelProtocol {
@@ -19,10 +19,13 @@ class SettingsModel: SettingsModelProtocol {
         self.controller = controller
     }
     
-    func deleteNotes(indexPath: IndexPath) {
-        if indexPath.row == 2 {
-            //TODO: change after (alert with confirmation)
-            coreDataService.deleteNotes()
+    func deleteNotes() {
+        coreDataService.deleteNotes { response in
+            if response == .success {
+                self.controller?.onSuccessDelete()
+            } else {
+                self.controller?.onFailureDelete()
+            }
         }
     }
 }

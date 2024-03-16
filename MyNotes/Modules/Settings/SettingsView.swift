@@ -9,14 +9,14 @@ import UIKit
 import SnapKit
 
 protocol SettingsViewProtocol {
-    func successDeletedNotes()
+    func successDeleteNotes()
+    
+    func failureDeleteNotes()
 }
 
 class SettingsView: UIViewController {
     
     var controller: SettingsControllerProtocol?
-    
-    var coreDataService = CoreDataService.shared
     
     private let settingsTableView = UITableView()
     
@@ -24,7 +24,7 @@ class SettingsView: UIViewController {
         Settings(image: "globe", title: "Язык", type: .withButton, language: "Русский"),
         Settings(image: "moon", title: "Темная тема", type: .withSwitch, language: ""),
         Settings(image: "trash", title: "Очистить", type: .none, language: "")]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -62,6 +62,7 @@ class SettingsView: UIViewController {
     private func setupSettingsTableView(){
         settingsTableView.register(SettingsCell.self, forCellReuseIdentifier: SettingsCell.reuseID)
         settingsTableView.dataSource = self
+        settingsTableView.delegate = self
         view.addSubview(settingsTableView)
         settingsTableView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
@@ -90,15 +91,30 @@ extension SettingsView: UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
-            //TODO: change after (alert with confirmation)
-            coreDataService.deleteNotes()
+            let alert  = UIAlertController(title: "Удаление", message: "Вы уверены что хотите удалить заметку?", preferredStyle: .alert)
+            let acceptAction = UIAlertAction(title: "Да", style: .destructive) { action in
+                print("Delete")
+                self.controller?.onDeleteNotes()
+            }
+            let declineAction = UIAlertAction(title: "Нет", style: .cancel)
+            
+            alert.addAction(declineAction)
+            alert.addAction(acceptAction)
+            present(alert, animated: true)
         }
     }
 }
 
 extension SettingsView: SettingsViewProtocol {
-    func successDeletedNotes() {
+    func successDeleteNotes() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    func failureDeleteNotes() {
+        let alert = UIAlertController(title: "Ошибка", message: "Не удалось удалить заметку", preferredStyle: .alert)
+        let acceptAction = UIAlertAction(title: "OK", style: .cancel)
+        alert.addAction(acceptAction)
+        present(alert, animated: true)
     }
 }
 

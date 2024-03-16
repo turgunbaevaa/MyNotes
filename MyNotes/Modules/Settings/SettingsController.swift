@@ -8,10 +8,15 @@
 import UIKit
 
 protocol SettingsControllerProtocol: AnyObject {
-    func deleteNotes()
+    func onDeleteNotes()
+    
+    func onSuccessDelete()
+    
+    func onFailureDelete()
 }
 
-class SettingsController {
+class SettingsController: SettingsControllerProtocol {
+    
     var view: SettingsViewProtocol?
     var model: SettingsModelProtocol?
     
@@ -19,10 +24,17 @@ class SettingsController {
         self.view = view
         self.model = SettingsModel(controller: self)
     }
-}
-
-extension SettingsController: SettingsControllerProtocol {
-    func deleteNotes() {
-        view?.successDeletedNotes()
+    
+    func onDeleteNotes() {
+        model?.deleteNotes()
     }
+    
+    func onSuccessDelete() {
+        view?.successDeleteNotes()
+    }
+    
+    func onFailureDelete() {
+        view?.failureDeleteNotes()
+    }
+    
 }

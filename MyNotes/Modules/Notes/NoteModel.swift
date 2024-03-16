@@ -8,11 +8,11 @@
 import Foundation
 
 protocol NoteModelProtocol {
-    func addNote(note: Note?, id: String, title: String, description: String, date: String)
-    
-    func deleteNote(note: Note?, id: String)
+    func addNote(note: Note?, title: String, description: String)
     
     func updateNote(note: Note?, id: String, title: String, description: String, date: String)
+    
+    func deleteNote(id: String)
 }
 
 class NoteModel: NoteModelProtocol {
@@ -25,25 +25,20 @@ class NoteModel: NoteModelProtocol {
         self.controller = controller
     }
     
-    func addNote(note: Note?, id: String, title: String, description: String, date: String) {
+    func addNote(note: Note?, title: String, description: String) {
         let currentDate = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
         let date = dateFormatter.string(from: currentDate)
         let id = UUID().uuidString
-        coreDataService.addNote(id: id, title: title, description: description, date: date)
-        //TODO: change after (with alert depending on the respons of the CoreData)
-        //navigationController?.popToRootViewController(animated: true)
-        controller?.onSuccessAddNote()
-    }
-    
-    
-    func deleteNote(note: Note?, id: String) {
-        guard let note = note else {
-            return
+        coreDataService.addNote(id: id, title: title, description: description, date: date) { response in
+            if response == .success {
+                self.controller?.onSuccessAddNote()
+            } else {
+                self.controller?.onFailureAddNote()
+            }
         }
-        coreDataService.deleteNote(id: note.id!)
-        controller?.onSuccessDeletedNote()
+        controller?.onSuccessAddNote()
     }
     
     func updateNote(note: Note?, id: String, title: String, description: String, date: String) {
@@ -52,4 +47,15 @@ class NoteModel: NoteModelProtocol {
         }
         controller?.onSuccessUpdatedNote(note: note, id: id, title: title, description: description, date: date)
     }
+    
+    func deleteNote(id: String) {
+        coreDataService.deleteNote(id: id) { response in
+            if response == .success {
+                self.controller?.onSuccessDeleteNote()
+            } else {
+                self.controller?.onFailureDeleteNote()
+            }
+        }
+    }
+    
 }

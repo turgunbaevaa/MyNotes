@@ -8,25 +8,33 @@
 import Foundation
 
 protocol NoteControllerProtocol {
-    func onAddNote(note: Note?, id: String, title: String, description: String, date: String)
-    
-    func onSuccessDeletedNote()
+    func onAddNote(note: Note?, title: String, description: String)
     
     func onSuccessUpdatedNote(note: Note?, id: String, title: String, description: String, date: String)
     
     func onSuccessAddNote()
     
     func onFailureAddNote()
+    
+    func onDeleteNote(id: String)
+    
+    func onSuccessDeleteNote()
+    
+    func onFailureDeleteNote()
 }
 
 class NoteController: NoteControllerProtocol {
     
-    func onAddNote(note: Note?, id: String, title: String, description: String, date: String) {
-        model?.addNote(note: note, id: id, title: title, description: description, date: date )
+    var view: NoteViewProtocol?
+    var model: NoteModelProtocol?
+    
+    init(view: NoteViewProtocol) {
+        self.view = view
+        self.model = NoteModel(controller: self)
     }
     
-    func onSuccessDeletedNote() {
-        view?.successDeleteNote()
+    func onAddNote(note: Note?, title: String, description: String) {
+        model?.addNote(note: note, title: title, description: description)
     }
     
     func onSuccessUpdatedNote(note: Note?, id: String, title: String, description: String, date: String) {
@@ -38,14 +46,20 @@ class NoteController: NoteControllerProtocol {
     }
     
     func onFailureAddNote() {
-        ()
+        view?.failureAddNote()
     }
     
-    var view: NoteViewProtocol?
-    var model: NoteModelProtocol?
-    
-    init(view: NoteViewProtocol) {
-        self.view = view
-        self.model = NoteModel(controller: self)
+    func  onDeleteNote(id: String) {
+        model?.deleteNote(id: id)
     }
+    
+    func onSuccessDeleteNote() {
+        view?.successDeleteNote()
+    }
+    
+    func onFailureDeleteNote() {
+        view?.failureDeleteNote ()
+    }
+    
+    
 }
