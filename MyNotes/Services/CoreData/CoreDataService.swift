@@ -38,7 +38,9 @@ class CoreDataService {
     //post запрос
     func addNote(id: String, title: String, description: String, date: String, completionHandler: @escaping (CoredataResponse) -> Void){
         guard let noteEntity = NSEntityDescription.entity(forEntityName: "Note", in: context) else {
-            completionHandler(.failure)
+            DispatchQueue.main.async {
+                completionHandler(.failure)
+            }
             return
         }
         
@@ -77,6 +79,7 @@ class CoreDataService {
             note.title = title
             note.desc = description
             note.date = date
+            
         } catch {
             print(error.localizedDescription)
         }

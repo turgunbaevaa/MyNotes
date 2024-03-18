@@ -144,7 +144,13 @@ class NoteView: UIViewController {
     }
     
     @objc func saveButtonTapped(){
-        controller?.onAddNote(note: note, title: titleBox.text ?? "", description: textBox.text ?? "")        
+        if let note = note {
+            controller?.onSuccessUpdatedNote(note: note, id: note.id ?? "", title: titleBox.text ?? "", description: textBox.text ?? "", date: "date")
+            successUpdatedNote()
+        } else {
+            controller?.onAddNote(note: nil, title: titleBox.text ?? "", description: textBox.text ?? "")
+            successAddNote()
+        }
     }
 }
 
@@ -174,7 +180,4 @@ extension NoteView: NoteViewProtocol {
         alert.addAction(acceptAction)
         present(alert, animated: true)
     }
-    
-    
-    
 }
