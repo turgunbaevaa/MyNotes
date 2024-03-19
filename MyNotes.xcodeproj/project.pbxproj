@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0A21E7B72B8E6FF9007066EC /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A21E7B62B8E6FF9007066EC /* HomeController.swift */; };
 		0A21E7B92B8E700E007066EC /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A21E7B82B8E700D007066EC /* HomeModel.swift */; };
+		0A508B352BA99C1B0016EDB4 /* LanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A508B342BA99C1B0016EDB4 /* LanguageCell.swift */; };
+		0A508B372BA99C700016EDB4 /* LanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A508B362BA99C700016EDB4 /* LanguageView.swift */; };
 		0A5E379F2BA326AE0078869A /* NoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5E379E2BA326AE0078869A /* NoteController.swift */; };
 		0A5E37A12BA326F10078869A /* NoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5E37A02BA326F10078869A /* NoteModel.swift */; };
 		0A6D4BF22B86433C007532EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A6D4BF12B86433C007532EE /* AppDelegate.swift */; };
@@ -35,6 +37,8 @@
 /* Begin PBXFileReference section */
 		0A21E7B62B8E6FF9007066EC /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		0A21E7B82B8E700D007066EC /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
+		0A508B342BA99C1B0016EDB4 /* LanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCell.swift; sourceTree = "<group>"; };
+		0A508B362BA99C700016EDB4 /* LanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageView.swift; sourceTree = "<group>"; };
 		0A5E379E2BA326AE0078869A /* NoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteController.swift; sourceTree = "<group>"; };
 		0A5E37A02BA326F10078869A /* NoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteModel.swift; sourceTree = "<group>"; };
 		0A6D4BEE2B86433C007532EE /* MyNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +75,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A508B332BA99C060016EDB4 /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				0A508B342BA99C1B0016EDB4 /* LanguageCell.swift */,
+				0A508B362BA99C700016EDB4 /* LanguageView.swift */,
+			);
+			path = Language;
+			sourceTree = "<group>";
+		};
 		0A6D4BE52B86433C007532EE = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +118,7 @@
 		0A6D4C082B864A28007532EE /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				0A508B332BA99C060016EDB4 /* Language */,
 				0AE29E262B9B410C00CF8A92 /* Notes */,
 				0AE29E212B99F38600CF8A92 /* OnBoarding */,
 				0A6D4C092B864A5F007532EE /* Home */,
@@ -281,10 +295,12 @@
 				0A5E37A12BA326F10078869A /* NoteModel.swift in Sources */,
 				0A6D4C0B2B864A77007532EE /* NoteCell.swift in Sources */,
 				0A8BB7152B9CACEB003EEB6B /* Note.xcdatamodeld in Sources */,
+				0A508B372BA99C700016EDB4 /* LanguageView.swift in Sources */,
 				0AE29E232B99F3AE00CF8A92 /* OnBoardingView.swift in Sources */,
 				0AA171902B90F2EC00BE39B4 /* SettingsModel.swift in Sources */,
 				0AB6E6852B96595400B8F6FF /* SettingsController.swift in Sources */,
 				0A8BB7192B9CAE27003EEB6B /* Note+CoreDataProperties.swift in Sources */,
+				0A508B352BA99C1B0016EDB4 /* LanguageCell.swift in Sources */,
 				0A21E7B72B8E6FF9007066EC /* HomeController.swift in Sources */,
 				0A5E379F2BA326AE0078869A /* NoteController.swift in Sources */,
 				0AE29E252B99F4DC00CF8A92 /* OnBoardCell.swift in Sources */,

@@ -50,6 +50,20 @@ class NoteView: UIViewController {
         return view
     }()
     
+    private lazy var copyButton: UIButton = {
+            let view = UIButton(type: .system)
+            view.setImage(UIImage(systemName: "doc.on.doc"), for: .normal)
+            view.tintColor = .lightGray
+            return  view
+        }()
+        
+        private lazy var notesDateLabel: UILabel = {
+            let view = UILabel()
+            view.textColor = .secondaryLabel
+            view.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+            return view
+        }()
+    
     private lazy var saveButton: UIButton = {
         let view = UIButton(type: .system)
         view.setTitle("Save", for: .normal)
@@ -69,6 +83,7 @@ class NoteView: UIViewController {
         } 
         titleBox.text = note.title
         textBox.text = note.desc
+        notesDateLabel.text = note.date
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,6 +106,11 @@ class NoteView: UIViewController {
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
+    @objc func copyButtonTapped(){
+        guard let textToCopy = textBox.text else { return }
+        UIPasteboard.general.string = textToCopy
+    }
+    
     @objc func trashButtonTapped(){
         guard let note = note else {
             return
@@ -109,6 +129,8 @@ class NoteView: UIViewController {
     private func setupUI(){
         setupTitleBox()
         setupTextBox()
+        setupNotesDateLabel()
+        setupCopyButton()
         setupSaveButton()
     }
     
@@ -120,6 +142,7 @@ class NoteView: UIViewController {
             make.trailing.equalTo(view.snp.trailing).offset(-22)
             make.height.equalTo(34)
         }
+        titleBox.delegate = self
     }
     
     private func setupTextBox(){
@@ -130,8 +153,28 @@ class NoteView: UIViewController {
             make.trailing.equalTo(view.snp.trailing).offset(-22)
             make.height.equalTo(475)
         }
+        textBox.delegate = self
     }
     
+    private func setupCopyButton(){
+        view.addSubview(copyButton)
+        copyButton.snp.makeConstraints { make in
+            make.bottom.equalTo(textBox.snp.bottom).offset(-12)
+            make.trailing.equalTo(textBox.snp.trailing).offset(-15)
+            make.height.width.equalTo(32)
+        }
+        copyButton.addTarget(self, action: #selector(copyButtonTapped), for: .touchUpInside)
+    }
+    
+    private func setupNotesDateLabel(){
+        view.addSubview(notesDateLabel)
+        notesDateLabel.snp.makeConstraints { make in
+            make.top.equalTo(textBox.snp.bottom).offset(6)
+            make.trailing.equalTo(textBox.snp.trailing).offset(-20)
+            make.height.equalTo(17)
+        }
+    }
+            
     private func setupSaveButton(){
         view.addSubview(saveButton)
         saveButton.snp.makeConstraints { make in
@@ -145,14 +188,38 @@ class NoteView: UIViewController {
     
     @objc func saveButtonTapped(){
         if let note = note {
-            controller?.onSuccessUpdatedNote(note: note, id: note.id ?? "", title: titleBox.text ?? "", description: textBox.text ?? "", date: "date")
+            controller?.onSuccessUpdatedNote(note: note, id: note.id ?? "", title: titleBox.text ?? "", description: textBox.text ?? "", date: notesDateLabel.text ?? "")
             successUpdatedNote()
         } else {
             controller?.onAddNote(note: nil, title: titleBox.text ?? "", description: textBox.text ?? "")
             successAddNote()
         }
     }
+    
+    private func updateSaveButtonState() {
+        if titleBox.text?.count != 0 || textBox.text?.count != 0 {
+            // Если текстовое поле не пустое, активируем кнопку сохранения и меняем ее текст
+            saveButton.isEnabled = true
+            saveButton.backgroundColor = UIColor().rgb(r: 255, g: 61, b: 61, alpha: 1)
+        } else {
+            // Если текстовое поле пустое, деактивируем кнопку сохранения и меняем ее текст
+            saveButton.isEnabled = false
+            saveButton.backgroundColor = .lightGray
+        }
+    }
 }
+
+extension NoteView: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView == titleBox {
+            print("Entered text in titleBox: \(titleBox.text ?? ""), count: \(titleBox.text?.count ?? 0)")
+        } else if textView == textBox {
+            print("Entered text in textBox: \(textBox.text ?? ""), count: \(textBox.text?.count ?? 0)")
+        }
+        updateSaveButtonState()
+    }
+}
+
 
 extension NoteView: NoteViewProtocol {
     func successAddNote() {
