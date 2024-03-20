@@ -115,11 +115,11 @@ class NoteView: UIViewController {
         guard let note = note else {
             return
         }
-        let alert  = UIAlertController(title: "Удаление".localized(), message: "Вы уверены что хотите удалить заметку?".localized(), preferredStyle: .alert)
-        let acceptAction = UIAlertAction(title: "Да".localized(), style: .destructive) { action in
+        let alert  = UIAlertController(title: "Deletion".localized(), message: "Are you sure that you want to delete this note?".localized(), preferredStyle: .alert)
+        let acceptAction = UIAlertAction(title: "Yes".localized(), style: .destructive) { action in
             self.controller?.onDeleteNote(id: note.id ?? "")
         }
-        let declineAction = UIAlertAction(title: "Нет".localized(), style: .cancel)
+        let declineAction = UIAlertAction(title: "No".localized(), style: .cancel)
         
         alert.addAction(declineAction)
         alert.addAction(acceptAction)
@@ -227,7 +227,7 @@ extension NoteView: NoteViewProtocol {
     }
     
     func failureAddNote() {
-        let alert = UIAlertController(title: "Ошибка".localized(), message: "Не удалось сохранить заметку".localized(), preferredStyle: .alert)
+        let alert = UIAlertController(title: "Error".localized(), message: "Failed to save the note".localized(), preferredStyle: .alert)
         let acceptAction = UIAlertAction(title: "OK", style: .cancel)
         alert.addAction(acceptAction)
         present(alert, animated: true)
@@ -242,7 +242,7 @@ extension NoteView: NoteViewProtocol {
     }
     
     func failureDeleteNote() {
-        let alert = UIAlertController(title: "Ошибка".localized(), message: "Не удалось удалить заметку".localized(), preferredStyle: .alert)
+        let alert = UIAlertController(title: "Error".localized(), message: "Failed to save the note".localized(), preferredStyle: .alert)
         let acceptAction = UIAlertAction(title: "OK", style: .cancel)
         alert.addAction(acceptAction)
         present(alert, animated: true)
