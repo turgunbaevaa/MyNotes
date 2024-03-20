@@ -20,14 +20,14 @@ class HomeView: UIViewController {
     
     private lazy var searchBar: UISearchBar = {
         let view = UISearchBar()
-        view.placeholder = "Search"
+        view.placeholder = "Search".localized()
         view.searchTextField.addTarget(self, action: #selector(noteSearchBarEditingChanged), for: .editingChanged)
         return view
     }()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Notes"
+        label.text = "Notes".localized()
         label.font = UIFont.systemFont(ofSize: 16)
         return label
     }()
@@ -82,7 +82,7 @@ class HomeView: UIViewController {
     }
     
     private func setupNavigationItem() {
-        navigationItem.title = "Home"
+        navigationItem.title = "Home".localized()
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(settingsButtonTapped))
         if UserDefaults.standard.bool(forKey: "theme") == true {
             rightBarButtonItem.tintColor = .white

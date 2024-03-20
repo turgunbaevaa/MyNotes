@@ -5,8 +5,24 @@
   Created by Aruuke Turgunbaeva on 19/3/24.
   
 */
+"Home" = "Главная";
+"Search" = "Искать";
+"Notes" = "Заметки";
 "Settings" = "Настройки";
 "Choose language" = "Язык";
 "Dark theme" = "Темная тема";
 "Clear data" = "Очистить данные";
 "Choose language" = "Выберите язык";
+"Save" = "Сохранить";
+"Deletion" = "Удаление";
+"Are you sure that you want to delete this note?" = "Вы уверены что хотите удалить заметку?";
+"Yes" = "Да";
+"No" = "Нет";
+"Error" = "Ошибка";
+"Failed to save the note" = "Не удалось сохранить заметку";
+"Skip" = "Пропустуть";
+"Next" = "Далее";
+"Notes" = "Заметки";
+"Welcome to The Note – your new companion for tasks, goals, health – all in one place. Let's get started!" = "Добро пожаловать в The Note - ваш новый компаньон для задач, целей, здоровья - все в одном месте. Давайте начнем!";
+"Now that you're with us, let's get to know each other better. Fill out your profile, share your interests, and set your goals." = "Теперь, когда вы с нами, давайте узнаем друг друга получше. Заполните свой профиль, поделитесь своими интересами и поставьте цели";
+"You're fully equipped to dive into the world of The Note. Remember, we're here to assist you every step of the way. Ready to start? Let's go!" = "Вы полностью готовы к погружению в мир The Note. Помните, что мы готовы помочь вам на каждом шагу. Готовы начать? Поехали!";

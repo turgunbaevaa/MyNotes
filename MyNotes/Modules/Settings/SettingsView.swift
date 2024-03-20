@@ -94,12 +94,11 @@ extension SettingsView: UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 2 {
-            let alert  = UIAlertController(title: "Удаление", message: "Вы уверены что хотите удалить заметку?", preferredStyle: .alert)
-            let acceptAction = UIAlertAction(title: "Да", style: .destructive) { action in
-                print("Delete")
+            let alert  = UIAlertController(title: "Удаление".localized(), message: "Вы уверены что хотите удалить заметку?".localized(), preferredStyle: .alert)
+            let acceptAction = UIAlertAction(title: "Да".localized(), style: .destructive) { action in
                 self.controller?.onDeleteNotes()
             }
-            let declineAction = UIAlertAction(title: "Нет", style: .cancel)
+            let declineAction = UIAlertAction(title: "Нет".localized(), style: .cancel)
             
             alert.addAction(declineAction)
             alert.addAction(acceptAction)
@@ -127,7 +126,7 @@ extension SettingsView: SettingsViewProtocol {
     }
     
     func failureDeleteNotes() {
-        let alert = UIAlertController(title: "Ошибка", message: "Не удалось удалить заметку", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Ошибка".localized(), message: "Не удалось удалить заметку".localized(), preferredStyle: .alert)
         let acceptAction = UIAlertAction(title: "OK", style: .cancel)
         alert.addAction(acceptAction)
         present(alert, animated: true)

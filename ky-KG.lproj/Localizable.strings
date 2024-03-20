@@ -5,9 +5,24 @@
   Created by Aruuke Turgunbaeva on 19/3/24.
   
 */
-
+"Home" = "Башкы бет";
+"Search" = "Издөө";
+"Notes" = "Жазууларым";
 "Settings" = "Ырастоолор";
 "Choose language" = "Тилди тандоо";
 "Dark theme" = "Караңгы тема";
 "Clear data" = "Маалыматтарды өчүрүү";
 "Choose language" = "Тилди тандаңыз";
+"Save" = "Сактоо";
+"Deletion" = "Өчүрүү";
+"Are you sure that you want to delete this note?" = "Бул жазууну чын эле өчүрүгүңүз келеби?";
+"Yes" = "Ооба";
+"No" = "Жок";
+"Error" = "Ката";
+"Failed to save the note" = "Жазуу сакталбай калды";
+"Skip" = "Өткөрүп жиберүү";
+"Next" = "Кийинки";
+"Notes" = "Жазуулар";
+"Welcome to The Note – your new companion for tasks, goals, health – all in one place. Let's get started!" = "The Note'ко кош келиңиз - тапшырмалар, максаттар, ден-соолук үчүн жаңы шериктешиңиз - бардыгы бир жерде. Келиңиз, баштайлы!";
+"Now that you're with us, let's get to know each other better. Fill out your profile, share your interests, and set your goals." = "Эми сиз биз менен болсоңуз, бири-бирибизди жакшыраак тааныйлы. Профилиңизди толтуруңуз, кызыккан нерселериңиз менен бөлүшүңүз жана максаттарыңызды коюңуз.";
+"You're fully equipped to dive into the world of The Note. Remember, we're here to assist you every step of the way. Ready to start? Let's go!" = "Сиз The Note дүйнөсүнө сүңгүүгө даярсыз. Эсиңизде болсун, биз сизге ар бир кадамда жардам берүүгө даярбыз. Баштоого даярсызбы? Кеттик!";

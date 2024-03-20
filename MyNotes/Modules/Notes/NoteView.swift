@@ -66,7 +66,7 @@ class NoteView: UIViewController {
     
     private lazy var saveButton: UIButton = {
         let view = UIButton(type: .system)
-        view.setTitle("Save", for: .normal)
+        view.setTitle("Save".localized(), for: .normal)
         view.setTitleColor(.white, for: .normal)
         view.layer.cornerRadius = 10
         view.backgroundColor = UIColor().rgb(r: 255, g: 61, b: 61, alpha: 1)
@@ -115,11 +115,11 @@ class NoteView: UIViewController {
         guard let note = note else {
             return
         }
-        let alert  = UIAlertController(title: "Удаление", message: "Вы уверены что хотите удалить заметку?", preferredStyle: .alert)
-        let acceptAction = UIAlertAction(title: "Да", style: .destructive) { action in
+        let alert  = UIAlertController(title: "Удаление".localized(), message: "Вы уверены что хотите удалить заметку?".localized(), preferredStyle: .alert)
+        let acceptAction = UIAlertAction(title: "Да".localized(), style: .destructive) { action in
             self.controller?.onDeleteNote(id: note.id ?? "")
         }
-        let declineAction = UIAlertAction(title: "Нет", style: .cancel)
+        let declineAction = UIAlertAction(title: "Нет".localized(), style: .cancel)
         
         alert.addAction(declineAction)
         alert.addAction(acceptAction)
@@ -227,7 +227,7 @@ extension NoteView: NoteViewProtocol {
     }
     
     func failureAddNote() {
-        let alert = UIAlertController(title: "Ошибка", message: "Не удалось сохранить заметку", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Ошибка".localized(), message: "Не удалось сохранить заметку".localized(), preferredStyle: .alert)
         let acceptAction = UIAlertAction(title: "OK", style: .cancel)
         alert.addAction(acceptAction)
         present(alert, animated: true)
@@ -242,7 +242,7 @@ extension NoteView: NoteViewProtocol {
     }
     
     func failureDeleteNote() {
-        let alert = UIAlertController(title: "Ошибка", message: "Не удалось удалить заметку", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Ошибка".localized(), message: "Не удалось удалить заметку".localized(), preferredStyle: .alert)
         let acceptAction = UIAlertAction(title: "OK", style: .cancel)
         alert.addAction(acceptAction)
         present(alert, animated: true)

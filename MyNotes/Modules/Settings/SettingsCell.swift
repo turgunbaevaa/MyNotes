@@ -75,16 +75,19 @@ class SettingsCell: UITableViewCell {
         setupSettingsSwitchButton()
     }
     
-    func setup(settings: Settings){
+    func setup(settings: Settings) {
         settingsImg.image = UIImage(systemName: settings.image)
         settingsTitle.text = settings.title
+        
         switch settings.type {
         case .none:
             button.isHidden = true
             switchButton.isHidden = true
         case .withSwitch:
             button.isHidden = true
+            switchButton.isHidden = false
         case .withButton:
+            button.isHidden = false 
             switchButton.isHidden = true
             button.setTitle(settings.language, for: .normal)
         }

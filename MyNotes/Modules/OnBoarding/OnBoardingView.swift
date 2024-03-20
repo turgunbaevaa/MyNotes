@@ -11,9 +11,9 @@ import SnapKit
 class OnBoardingView: UIViewController {
     
     private var onBoard: [OnBoard] = [
-        OnBoard(image: "first_img", title: "Welcome to The Note", descTitle: "Welcome to The Note – your new companion for tasks, goals, health – all in one place. Let's get started!"),
-        OnBoard(image: "second_img", title: "Set Up Your Profile", descTitle: "Now that you're with us, let's get to know each other better. Fill out your profile, share your interests, and set your goals."),
-        OnBoard(image: "third_img", title: "Dive into The Note", descTitle: "You're fully equipped to dive into the world of The Note. Remember, we're here to assist you every step of the way. Ready to start? Let's go!")]
+        OnBoard(image: "first_img", title: "Welcome to The Note".localized(), descTitle: "Welcome to The Note – your new companion for tasks, goals, health – all in one place. Let's get started!".localized()),
+        OnBoard(image: "second_img", title: "Set Up Your Profile".localized(), descTitle: "Now that you're with us, let's get to know each other better. Fill out your profile, share your interests, and set your goals.".localized()),
+        OnBoard(image: "third_img", title: "Dive into The Note".localized(), descTitle: "You're fully equipped to dive into the world of The Note. Remember, we're here to assist you every step of the way. Ready to start? Let's go!".localized())]
     
     private lazy var onBoardingCollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -41,7 +41,7 @@ class OnBoardingView: UIViewController {
     
     private lazy var nextButton: UIButton = {
         let view = UIButton(type: .system)
-        view.setTitle("Next", for: .normal)
+        view.setTitle("Next".localized(), for: .normal)
         view.setTitleColor(.white, for: .normal)
         view.layer.cornerRadius = 21
         view.backgroundColor = UIColor().rgb(r: 255, g: 61, b: 61, alpha: 1)
@@ -50,7 +50,7 @@ class OnBoardingView: UIViewController {
     
     private lazy var skipButton: UIButton = {
         let view = UIButton(type: .system)
-        view.setTitle("Skip", for: .normal)
+        view.setTitle("Skip".localized(), for: .normal)
         view.setTitleColor(.red, for: .normal)
         return view
     }()
@@ -144,16 +144,13 @@ extension OnBoardingView: UICollectionViewDelegateFlowLayout {
         case 0.0:
             currentPage = 0
             pageControl.currentPage = 0
-            print("Первая страница")
         case 1.0:
             currentPage = 1
             pageControl.currentPage = 1
-            print("Вторая страница")
         case 2.0:
             UserDefaults.standard.set(true, forKey: "isOnBoardShown")
             currentPage = 2
             pageControl.currentPage = 2
-            print("Третья страница")
         default:
             ()
         }
