@@ -20,10 +20,10 @@ class SettingsView: UIViewController {
     
     private let settingsTableView = UITableView()
     
-    private var settings: [Settings] = [
-        Settings(image: "globe", title: "Язык", type: .withButton, language: "Русский"),
-        Settings(image: "moon", title: "Темная тема", type: .withSwitch, language: ""),
-        Settings(image: "trash", title: "Очистить", type: .none, language: "")]
+    private lazy var setData: [Settings] = [
+        Settings(image: "globe", title: "Choose language".localized(), type: .withButton, language: "English".localized()),
+        Settings(image: "moon", title: "Dark theme".localized(), type: .withSwitch, language: ""),
+        Settings(image: "trash", title: "Clear data".localized(), type: .none, language: "")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,12 +46,15 @@ class SettingsView: UIViewController {
         setupSettingsTableView()
     }
     
-    deinit {
-        print("Экран настроек пропал из вида и уничтожился")
-    }
+    private func setupData() {
+        setData = [Settings(image: "globe", title: "Choose language".localized(), type: .withButton, language: "English"),
+                   Settings(image: "moon", title: "Dark theme".localized(), type: .withSwitch, language: ""),
+                   Settings(image: "trash", title: "Clear data".localized(), type: .none, language: "")]
+        settingsTableView.reloadData()
+        }
     
     private func setupNavigationItem() {
-        navigationItem.title = "Settings"
+        navigationItem.title = "Settings".localized()
         if UserDefaults.standard.bool(forKey: "theme") == true {
             navigationController?.navigationBar.standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         } else {
@@ -74,12 +77,12 @@ class SettingsView: UIViewController {
 
 extension SettingsView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settings.count
+        return setData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SettingsCell.reuseID, for: indexPath) as! SettingsCell
-        cell.setup(settings: settings[indexPath.row])
+        cell.setup(settings: setData[indexPath.row])
         cell.delegate = self
         return cell
     }
@@ -101,6 +104,19 @@ extension SettingsView: UITableViewDelegate {
             alert.addAction(declineAction)
             alert.addAction(acceptAction)
             present(alert, animated: true)
+            
+        } else if indexPath.row == 0 {
+            let languageView = LanguageView()
+            languageView.delegate = self
+            let multiplier = 0.25
+            let customDetent = UISheetPresentationController.Detent.custom(resolver: { context in
+                languageView.view.frame.height * multiplier
+            })
+            if let sheet = languageView.sheetPresentationController {
+                sheet.detents = [customDetent, .medium()]
+                sheet.prefersGrabberVisible = true
+            }
+            self.present(languageView, animated: true)
         }
     }
 }
@@ -126,5 +142,12 @@ extension SettingsView: SettingsCellDelegate {
         } else {
             view.overrideUserInterfaceStyle = .light
         }
+    }
+}
+
+extension SettingsView: LanguageViewDelegate {
+    func didLanguageSelected(languageType: LanguageType) {
+        setupNavigationItem()
+        setupData()
     }
 }

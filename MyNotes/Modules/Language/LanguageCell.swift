@@ -6,31 +6,34 @@
 //
 
 import UIKit
+import SnapKit
 
 struct Language {
     var img: String
     var language: String
 }
 
-class LanguageCell: UICollectionViewCell {
+class LanguageCell: UITableViewCell {
     
     static var reuseId = "language_cell"
     
     private lazy var languageImg: UIImageView = {
         let view = UIImageView()
+        view.layer.cornerRadius = 32/2
+        view.clipsToBounds = true
         return view
     }()
     
     private lazy var languageTitle: UILabel = {
         let view = UILabel()
         view.numberOfLines = 0
-        view.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        view.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         view.textAlignment = .center
         return view
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
     }
     
@@ -46,19 +49,17 @@ class LanguageCell: UICollectionViewCell {
     private func setupLanguageImg(){
         addSubview(languageImg)
         languageImg.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(9)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(32)
-            make.height.equalTo(32)
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(16)
+            make.width.height.equalTo(32)
         }
     }
     
     private func setupLanguageTitle(){
         addSubview(languageTitle)
         languageTitle.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(9)
-            make.leading.equalTo(languageImg.snp.trailing).offset(91)
-            make.centerX.equalToSuperview()
+            make.center.equalToSuperview()
+            //make.centerY.equalToSuperview()
         }
         languageTitle.preferredMaxLayoutWidth = UIScreen.main.bounds.width - 150
     }
