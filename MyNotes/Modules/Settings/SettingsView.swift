@@ -55,11 +55,6 @@ class SettingsView: UIViewController {
     
     private func setupNavigationItem() {
         navigationItem.title = "Settings".localized()
-        if UserDefaults.standard.bool(forKey: "theme") == true {
-            navigationController?.navigationBar.standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        } else {
-            navigationController?.navigationBar.standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
-        }
     }
     
     private func setupSettingsTableView(){
@@ -141,6 +136,7 @@ extension SettingsView: SettingsCellDelegate {
         } else {
             view.overrideUserInterfaceStyle = .light
         }
+        navigationController?.navigationBar.standardAppearance.titleTextAttributes = [.foregroundColor: isOn ? UIColor.white : UIColor.black]
     }
 }
 

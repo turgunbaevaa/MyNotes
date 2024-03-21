@@ -44,25 +44,24 @@ class NoteView: UIViewController {
         let view = UITextView()
         view.autocorrectionType = .no
         view.layer.cornerRadius = 20
-        view.backgroundColor = UIColor().rgb(r: 238, g: 238, b: 239, alpha: 1)
         view.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         view.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         return view
     }()
     
     private lazy var copyButton: UIButton = {
-            let view = UIButton(type: .system)
-            view.setImage(UIImage(systemName: "doc.on.doc"), for: .normal)
-            view.tintColor = .lightGray
-            return  view
-        }()
-        
-        private lazy var notesDateLabel: UILabel = {
-            let view = UILabel()
-            view.textColor = .secondaryLabel
-            view.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
-            return view
-        }()
+        let view = UIButton(type: .system)
+        view.setImage(UIImage(systemName: "doc.on.doc"), for: .normal)
+        view.tintColor = .lightGray
+        return  view
+    }()
+    
+    private lazy var notesDateLabel: UILabel = {
+        let view = UILabel()
+        view.textColor = .secondaryLabel
+        view.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        return view
+    }()
     
     private lazy var saveButton: UIButton = {
         let view = UIButton(type: .system)
@@ -80,7 +79,7 @@ class NoteView: UIViewController {
         setupUI()
         guard let note = note else {
             return
-        } 
+        }
         titleBox.text = note.title
         textBox.text = note.desc
         notesDateLabel.text = note.date
@@ -90,19 +89,23 @@ class NoteView: UIViewController {
         super.viewWillAppear(animated)
         setupNavigationItem()
         if UserDefaults.standard.bool(forKey: "theme") == true {
-            view.overrideUserInterfaceStyle = .dark
+            view.backgroundColor = .black
+            titleBox.textColor = .white
+            titleBox.backgroundColor = .darkGray
+            textBox.textColor = .white
+            textBox.backgroundColor = .darkGray
+            notesDateLabel.textColor = .white
         } else {
-            view.overrideUserInterfaceStyle = .light
+            view.backgroundColor = .white
+            titleBox.textColor = .black
+            titleBox.backgroundColor = .white
+            textBox.textColor = .black
+            textBox.backgroundColor = UIColor().rgb(r: 238, g: 238, b: 239, alpha: 1)
         }
     }
     
     private func setupNavigationItem() {
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(trashButtonTapped))
-        if UserDefaults.standard.bool(forKey: "theme") == true {
-            navigationController?.navigationBar.standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        } else {
-            navigationController?.navigationBar.standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.black]
-        }
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
@@ -174,7 +177,7 @@ class NoteView: UIViewController {
             make.height.equalTo(17)
         }
     }
-            
+    
     private func setupSaveButton(){
         view.addSubview(saveButton)
         saveButton.snp.makeConstraints { make in
@@ -248,3 +251,27 @@ extension NoteView: NoteViewProtocol {
         present(alert, animated: true)
     }
 }
+
+extension NoteView: NoteCellDelegate {
+    func didSwitchOn(isOn: Bool) {
+        UserDefaults.standard.set(isOn, forKey: "theme")
+        if isOn {
+            view.overrideUserInterfaceStyle = .dark
+            view.backgroundColor = .black
+            titleBox.textColor = .white
+            titleBox.backgroundColor = .darkGray
+            textBox.textColor = .white
+            textBox.backgroundColor = .darkGray
+            notesDateLabel.textColor = .white
+        } else {
+            view.overrideUserInterfaceStyle = .light
+            view.backgroundColor = .white
+            titleBox.textColor = .black
+            titleBox.backgroundColor = .white
+            textBox.textColor = .black
+            textBox.backgroundColor = UIColor().rgb(r: 238, g: 238, b: 239, alpha: 1)
+        }
+        navigationController?.navigationBar.standardAppearance.titleTextAttributes = [.foregroundColor: isOn ? UIColor.white : UIColor.black]
+    }
+}
+

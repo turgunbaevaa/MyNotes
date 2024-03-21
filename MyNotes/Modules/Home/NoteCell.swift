@@ -8,8 +8,12 @@
 import UIKit
 import SnapKit
 
+//protocol NoteCellDelegate: AnyObject {
+//    func didLikedButton(index: Int)
+//}
+
 protocol NoteCellDelegate: AnyObject {
-    func didLikedButton(index: Int)
+    func didSwitchOn(isOn: Bool)
 }
 
 class NoteCell: UICollectionViewCell {
