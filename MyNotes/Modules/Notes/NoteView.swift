@@ -89,18 +89,9 @@ class NoteView: UIViewController {
         super.viewWillAppear(animated)
         setupNavigationItem()
         if UserDefaults.standard.bool(forKey: "theme") == true {
-            view.backgroundColor = .black
-            titleBox.textColor = .white
-            titleBox.backgroundColor = .darkGray
-            textBox.textColor = .white
-            textBox.backgroundColor = .darkGray
-            notesDateLabel.textColor = .white
+            didSwitchOn(isOn: true)
         } else {
-            view.backgroundColor = .white
-            titleBox.textColor = .black
-            titleBox.backgroundColor = .white
-            textBox.textColor = .black
-            textBox.backgroundColor = UIColor().rgb(r: 238, g: 238, b: 239, alpha: 1)
+            didSwitchOn(isOn: false)
         }
     }
     

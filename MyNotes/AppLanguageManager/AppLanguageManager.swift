@@ -13,6 +13,11 @@ enum LanguageType: String {
     case en = "en"
 }
 
+enum AppLanguageManagerResponse {
+    case success
+    case failure
+}
+
 class AppLanguageManager {
     static let shared = AppLanguageManager()
     
@@ -24,9 +29,12 @@ class AppLanguageManager {
         return currentBundle
     }
     
-    func setAppLanguage(language: LanguageType) {
+    func setAppLanguage(language: LanguageType, completionHandler: @escaping (AppLanguageManagerResponse) -> Void) {
         setCurrentLanguage(language: language)
         setCurrentBundlePath(languageCode: language.rawValue)
+        DispatchQueue.main.async {
+            completionHandler(.success)
+        }
     }
     
     private func setCurrentLanguage(language: LanguageType){

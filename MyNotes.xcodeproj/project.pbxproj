@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A185C512BADA16300870376 /* LanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A185C502BADA16300870376 /* LanguageController.swift */; };
+		0A185C532BADA17300870376 /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A185C522BADA17200870376 /* LanguageModel.swift */; };
 		0A21E7B72B8E6FF9007066EC /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A21E7B62B8E6FF9007066EC /* HomeController.swift */; };
 		0A21E7B92B8E700E007066EC /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A21E7B82B8E700D007066EC /* HomeModel.swift */; };
 		0A508B352BA99C1B0016EDB4 /* LanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A508B342BA99C1B0016EDB4 /* LanguageCell.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A185C502BADA16300870376 /* LanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageController.swift; sourceTree = "<group>"; };
+		0A185C522BADA17200870376 /* LanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageModel.swift; sourceTree = "<group>"; };
 		0A21E7B62B8E6FF9007066EC /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		0A21E7B82B8E700D007066EC /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
 		0A508B342BA99C1B0016EDB4 /* LanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCell.swift; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 			children = (
 				0A508B342BA99C1B0016EDB4 /* LanguageCell.swift */,
 				0A508B362BA99C700016EDB4 /* LanguageView.swift */,
+				0A185C502BADA16300870376 /* LanguageController.swift */,
+				0A185C522BADA17200870376 /* LanguageModel.swift */,
 			);
 			path = Language;
 			sourceTree = "<group>";
@@ -319,8 +325,10 @@
 				0A8BB7152B9CACEB003EEB6B /* Note.xcdatamodeld in Sources */,
 				0A508B372BA99C700016EDB4 /* LanguageView.swift in Sources */,
 				0AE29E232B99F3AE00CF8A92 /* OnBoardingView.swift in Sources */,
+				0A185C512BADA16300870376 /* LanguageController.swift in Sources */,
 				0AA171902B90F2EC00BE39B4 /* SettingsModel.swift in Sources */,
 				0AB6E6852B96595400B8F6FF /* SettingsController.swift in Sources */,
+				0A185C532BADA17300870376 /* LanguageModel.swift in Sources */,
 				0A8BB7192B9CAE27003EEB6B /* Note+CoreDataProperties.swift in Sources */,
 				0A508B352BA99C1B0016EDB4 /* LanguageCell.swift in Sources */,
 				0A21E7B72B8E6FF9007066EC /* HomeController.swift in Sources */,
@@ -500,7 +508,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = turgunbaeva.MyNotes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turgunbaeva.MyNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -527,7 +535,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = turgunbaeva.MyNotes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.turgunbaeva.MyNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

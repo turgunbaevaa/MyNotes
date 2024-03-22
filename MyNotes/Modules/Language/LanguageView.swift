@@ -12,6 +12,10 @@ protocol LanguageViewDelegate: AnyObject {
     func didLanguageSelected(languageType: LanguageType)
 }
 
+protocol LanguageViewProtocol {
+    
+}
+
 class LanguageView: UIViewController {
     
     private var languages: [Language] = [Language(img: "kg", language: "Кыргызча"), 

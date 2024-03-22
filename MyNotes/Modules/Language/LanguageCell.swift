@@ -59,7 +59,6 @@ class LanguageCell: UITableViewCell {
         addSubview(languageTitle)
         languageTitle.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            //make.centerY.equalToSuperview()
         }
         languageTitle.preferredMaxLayoutWidth = UIScreen.main.bounds.width - 150
     }
