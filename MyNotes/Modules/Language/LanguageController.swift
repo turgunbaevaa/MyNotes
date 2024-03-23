@@ -8,11 +8,9 @@
 import UIKit
 
 protocol LanguageControllerProtocol {
-    func onSelectLanguage()
+    func onSelectLanguage(language: LanguageType)
     
-    func onSuccessSelectLanguage()
-    
-    func onFailureSelectLanguage()
+    func onSuccessSelectLanguage(language: LanguageType)
 }
 
 class LanguageController: LanguageControllerProtocol {
@@ -25,17 +23,12 @@ class LanguageController: LanguageControllerProtocol {
         self.model = LanguageModel(controller: self)
     }
     
-    func onSelectLanguage() {
-        
+    func onSelectLanguage(language: LanguageType) {
+        model?.selectLanguage(language: language) { response in
+        }
     }
     
-    func onSuccessSelectLanguage() {
-        
+    func onSuccessSelectLanguage(language: LanguageType) {
+        view?.successSelectedLanguage(language: language)
     }
-    
-    func onFailureSelectLanguage() {
-        
-    }
-    
-    
 }

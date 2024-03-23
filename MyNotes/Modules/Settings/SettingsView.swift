@@ -50,6 +50,7 @@ class SettingsView: UIViewController {
         setData = [Settings(image: "globe", title: "Choose language".localized(), type: .withButton, language: "English"),
                    Settings(image: "moon", title: "Dark theme".localized(), type: .withSwitch, language: ""),
                    Settings(image: "trash", title: "Clear data".localized(), type: .none, language: "")]
+        
         settingsTableView.reloadData()
         }
     

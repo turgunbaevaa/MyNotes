@@ -13,7 +13,7 @@ protocol LanguageViewDelegate: AnyObject {
 }
 
 protocol LanguageViewProtocol {
-    
+    func successSelectedLanguage(language: LanguageType)
 }
 
 class LanguageView: UIViewController {
@@ -23,6 +23,8 @@ class LanguageView: UIViewController {
                                          Language(img: "usa", language: "English")]
     
     weak var delegate: LanguageViewDelegate?
+    
+    var controller: LanguageControllerProtocol?
     
     private lazy var chooseLanguageTitle: UILabel = {
         let view = UILabel()
@@ -43,6 +45,7 @@ class LanguageView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        controller = LanguageController(view: self)
         setupUI()
     }
     
@@ -56,7 +59,6 @@ class LanguageView: UIViewController {
         chooseLanguageTitle.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
             make.leading.equalTo(view.snp.leading).offset(20)
-            
         }
     }
     
@@ -81,7 +83,6 @@ extension LanguageView: UITableViewDataSource {
         cell.setData(languages[indexPath.row].img, title: languages[indexPath.row].language)
         return cell
     }
-    
 }
 
 extension LanguageView: UITableViewDelegate {
@@ -92,17 +93,21 @@ extension LanguageView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0: 
-            AppLanguageManager.shared.setAppLanguage(language: .kg)
-            delegate?.didLanguageSelected(languageType: .kg)
+            self.controller?.onSelectLanguage(language: .kg)
         case 1:
-            AppLanguageManager.shared.setAppLanguage(language: .ru)
-            delegate?.didLanguageSelected(languageType: .ru)
+            self.controller?.onSelectLanguage(language: .ru)
         case 2:
-            AppLanguageManager.shared.setAppLanguage(language: .en)
-            delegate?.didLanguageSelected(languageType: .en)
+            self.controller?.onSelectLanguage(language: .en)
         default:
             ()
         }
+        delegate?.didLanguageSelected(languageType: .en)
+    }
+}
+
+extension LanguageView: LanguageViewProtocol {
+    func successSelectedLanguage(language: LanguageType) {
+        delegate?.didLanguageSelected(languageType: language)
         dismiss(animated: true)
     }
 }

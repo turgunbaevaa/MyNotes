@@ -11,18 +11,33 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Определение замыкания для обработки результата установки языка
+        let languageSetupCompletion: (AppLanguageManagerResponse) -> Void = { response in
+            DispatchQueue.main.async {
+                // Обработка успешной или неудачной установки языка
+                switch response {
+                case .success:
+                    // Действия при успешной установке языка
+                    print("Язык успешно установлен.")
+                case .failure:
+                    // Действия при неудачной установке языка
+                    print("Не удалось установить язык.")
+                }
+            }
+        }
+        // Проверяем, сохранен ли язык в UserDefaults
         if let savedLanguageString = UserDefaults.standard.string(forKey: "selectedLanguage"),
            let savedLanguage = LanguageType(rawValue: savedLanguageString) {
-            AppLanguageManager.shared.setAppLanguage(language: savedLanguage)
+            // Устанавливаем сохраненный язык
+            AppLanguageManager.shared.setAppLanguage(language: savedLanguage, completionHandler: languageSetupCompletion)
         } else {
-            AppLanguageManager.shared.setAppLanguage(language: .en)
+            // Если язык не сохранен, устанавливаем английский язык
+            AppLanguageManager.shared.setAppLanguage(language: .en, completionHandler: languageSetupCompletion)
         }
         return true
     }
-    
+
     // MARK: UISceneSession Lifecycle
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

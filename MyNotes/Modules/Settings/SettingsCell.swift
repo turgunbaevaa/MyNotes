@@ -44,6 +44,7 @@ class SettingsCell: UITableViewCell {
     
     var button: UIButton = {
         let view = UIButton(type: .system)
+        view.semanticContentAttribute = .forceLeftToRight
         return view
     }()
     
@@ -89,7 +90,7 @@ class SettingsCell: UITableViewCell {
         case .withButton:
             button.isHidden = false 
             switchButton.isHidden = true
-            button.setTitle(settings.language, for: .normal)
+            button.setTitle(settings.language.localized(), for: .normal)
         }
     }
     

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LanguageModelProtocol {
-    func selectLanguage()
+    func selectLanguage(language: LanguageType, completionHandler: @escaping (AppLanguageManagerResponse) -> Void)
 }
 
 class LanguageModel: LanguageModelProtocol {
@@ -20,7 +20,16 @@ class LanguageModel: LanguageModelProtocol {
         self.controller = controller
     }
     
-    func selectLanguage() {
-        
+    func selectLanguage(language: LanguageType, completionHandler: @escaping (AppLanguageManagerResponse) -> Void) {
+        appLanguageManager.setAppLanguage(language: language) { response in
+            DispatchQueue.main.async {
+                switch response {
+                case .success:
+                    self.controller?.onSuccessSelectLanguage(language: language)
+                case .failure:
+                    completionHandler(.failure)
+                }
+            }
+        }
     }
 }
