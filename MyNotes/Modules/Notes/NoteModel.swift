@@ -25,21 +25,6 @@ class NoteModel: NoteModelProtocol {
         self.controller = controller
     }
     
-//    func addNote(note: Note?, title: String, description: String) {
-//        let currentDate = Date()
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm:ss"
-//        let date = dateFormatter.string(from: currentDate)
-//        let id = UUID().uuidString
-//        coreDataService.addNote(id: id, title: title, description: description, date: date) { response in
-//            if response == .success {
-//                self.controller?.onSuccessAddNote()
-//            } else {
-//                self.controller?.onFailureAddNote()
-//            }
-//        }
-//        controller?.onSuccessAddNote()
-//    }
     func addNote(note: Note?, title: String, description: String) {
         let currentDate = Date()
         let dateFormatter = DateFormatter()
